@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Parking system|
+{% endblock %}
+{% load staticfiles %}
+{% block content %}
+
+<div style="width:100%;text-align: center;margin: 0 auto;position: absolute;">
+        <div id="windows1">
+        <div id="loginbox">
+               
+            <h1  style="color:white"> Choose the site nearest to you  {{ position_list.site_address }}</h1>
+            <table class="table">
+                    <thead>                        
+                                
+                    </thead>
+                    <tbody>
+                        
+                                <form action="" method="POST">
+                                                {% csrf_token %}
+                                                {% for item in positions_list %}
+       
+                                                    <h4 > {{ item.site_address}}  </h4>
+                                                    {% for choice in item.positions_set.all %}
+                                                    <h4 > <a style="color:white" href="/carposition/order_position/{{ item.site_no}}/{{  choice.position_num }}"> {{ choice.position_num}}</a> </h4>
+                                                    {% endfor %}
+                                                {% endfor %}
+                                                <span>{{ user_form.non_field_errors }}</span>
+                                                <input type="submit" value="register">
+                                            </form>
+                                
+                    </tbody>
+            </table>                    
+        </div>        
+    </div>            
+</div>
+
+<div id="templatemo_banner_slide" class="container_wapper">
+    <div class="camera_wrap camera_emboss" id="camera_slide">
+        <div data-src="{% static '/login/images/banner_slide_01.jpg' %}"></div>
+        <div data-src="{% static '/login/images/banner_slide_02.jpg'  %}"></div>
+        <div data-src="{% static '/login/images/banner_slide_03.jpg'  %}"></div>
+        <div data-src="{% static '/login/images/banner_slide_04.jpg'  %}"></div>
+        <div data-src="{% static '/login/images/banner_slide_05.jpg'  %}"></div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+       
+                <!-- {% for item in site_position.Position_set.all %}
+                
+                    <h4 > <a style="color:white" href="#"> {{ item.position_num}}</a> </h4>
+               <h1>efefef</h1>
+                {% endfor %} -->
+ 
+
+
+
+       

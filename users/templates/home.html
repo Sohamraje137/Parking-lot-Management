@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Parking system|Home
+{% endblock %}
+{% load staticfiles %}
+{% block content %}
+
+<div style="width:100%;text-align: center;margin: 0 auto;position: absolute;">
+    <!--  -->
+    
+    <div id="windows1">
+        <div id="loginbox">
+            <h1>Welcome to the parking management system
+            </h1>
+            {% if user.is_authenticated %}
+
+            <h2 class="normal_text">Current user:{{ user.username }}</h2>
+            
+            {% else %}
+            <h4 class="normal_text">To use this system, please log in to this system first.
+            </h4>
+            {% endif %}
+   
+            
+            {% if not user.is_authenticated %}
+           
+            <a class="normal_text" href="{% url 'login' %}">Log-in</a>
+            
+            <a class="normal_text" href="{% url 'register' %}">registered</a>
+            {% endif %}
+
+            <div>
+                <p> </p>
+                    <a class="normal_text" href="/tariff/download_csv" type="button" >Want to check the tariff rates?</a>        
+
+            </div>
+            <div>
+                <p class="normal_text">Current remaining parking spaces:<b> {{ car_pos_num }} </b>个</p>
+                {% if user.is_authenticated %}
+                    <a class="normal_text" href="/carposition/index" type="button" >Booking parking space</a>        
+                {% else %}
+                    <a class="normal_text" type="button" disabled="disabled">Booking parking space [not logged in]</a>
+                {% endif %}
+            </div>
+        </div>        
+    </div>
+    </div>            
+</div>
+
+<div id="templatemo_banner_slide" class="container_wapper">
+    <div class="camera_wrap camera_emboss" id="camera_slide">
+        <!-- Background picture -->
+        <div data-src="{% static '/login/images/banner_slide_01.jpg' %}"></div>
+        <div data-src="{% static '/login/images/banner_slide_02.jpg'  %}"></div>
+        <div data-src="{% static '/login/images/banner_slide_03.jpg'  %}"></div>
+        <div data-src="{% static '/login/images/banner_slide_04.jpg'  %}"></div>
+        <div data-src="{% static '/login/images/banner_slide_05.jpg'  %}"></div>
+    </div>
+    <!-- #camera_wrap_3 -->
+</div>
+<!-- <form action="" method="POST">
+    {% csrf_token %}
+    {% for field in login_form %}
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        <p>{{ field.errors.as_text }}</p>
+    {% endfor %}
+    <span>{{ login_form.non_field_errors }}</span>
+    <input type="submit" value="登录">
+</form> -->
+{% endblock %}

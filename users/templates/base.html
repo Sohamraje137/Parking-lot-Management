@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        {% load staticfiles %}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{% static '/login/bootstrap.min.css' %}" />
+        <link rel="stylesheet" href="{% static '/login/css/camera.css' %}" />
+        <link rel="stylesheet" href="{% static '/login/bootstrap-responsive.min.css' %}" />
+        <link rel="stylesheet" href="{% static '/login/matrix-login.css' %}" />
+        <link rel="stylesheet" href="{% static '/login/font-awesome.css' %}" />
+        <script type="text/javascript" src="{% static '/login/js/jquery-1.5.1.min.js' %}"></script>
+        <!-- start -->
+        <link href="{% static '/login/keypad/css/framework/form.css' %}" rel="stylesheet" type="text/css"/>
+        <!-- end -->
+        <style type="text/css">
+            
+        body{
+            /* -webkit-transform: rotate(-3deg);
+            -moz-transform: rotate(-3deg);
+            -o-transform: rotate(-3deg); */
+            padding-top:0px;
+            }
+        
+            .cavs{
+                z-index:1;
+                position: fixed;
+                width:95%;
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+        </style>
+        <script>
+                //window.setTimeout(showfh,3000); 
+                var timer;
+                function showfh(){
+                    fhi = 1;
+                    timer = setInterval(xzfh2, 10); 
+                };
+                var current = 0;
+                function xzfh(){
+                    current = (current)%360;
+                    document.body.style.transform = 'rotate('+current+'deg)';
+                    current ++;
+                    if(current>360){current = 0;}
+                };
+                var fhi = 1;
+                var current2 = 1;
+                function xzfh2(){
+                    if(fhi>50){
+                        document.body.style.transform = 'rotate(0deg)';
+                        clearInterval(timer);
+                        return;
+                    }
+                    current = (current2)%360;
+                    document.body.style.transform = 'rotate('+current+'deg)';
+                    current ++;
+                    if(current2 == 1){current2 = -1;}else{current2 = 1;}
+                    fhi++;
+                };
+        </script>
+    </head>
+    <body>
+        {% block content %}{% endblock %}
+
+        <script type="text/javascript">
+            //服务器校验
+            function severCheck(){
+                if(check()){
+                    var loginname = $("#loginname").val();
+                    var password = $("#password").val();
+                    var code = loginname+","+password+","+$("#code").val();
+                    $.ajax({
+                        type: "POST",
+                        url: 'login_login',
+                        data: {KEYDATA:code,tm:new Date().getTime()},
+                        dataType:'json',
+                        cache: false,
+                        success: function(data){
+                            if("success" == data.result){
+                                saveCookie();
+                                window.location.href="<%=basePath%>main/index";
+                            }else if("usererror" == data.result){
+                                $("#loginname").tips({
+                                    side : 1,
+                                    msg : " Incorrect name or password",
+                                    bg : '#FF5080',
+                                    time : 15
+                                });
+                                showfh();
+                                $("#loginname").focus();
+                            }else if("codeerror" == data.result){
+                                $("#code").tips({
+                                    side : 1,
+                                    msg : "Verification code input is incorrect",
+                                    bg : '#FF5080',
+                                    time : 15
+                                });
+                                showfh();
+                                $("#code").focus();
+                            }else{
+                                $("#loginname").tips({
+                                    side : 1,
+                                    msg : "Missing parameters",
+                                    bg : '#FF5080',
+                                    time : 15
+                                });
+                                showfh();
+                                $("#loginname").focus();
+                            }
+                        }
+                    });
+                }
+            }
+        
+            $(document).ready(function() {
+                changeCode1();
+                $("#codeImg").bind("click", changeCode1);
+                $("#zcodeImg").bind("click", changeCode2);
+            });
+    
+            $(document).keyup(function(event) {
+                if (event.keyCode == 13) {
+                    $("#to-recover").trigger("click");
+                }
+            });
+    
+            function genTimestamp() {
+                var time = new Date();
+                return time.getTime();
+            }
+    
+            function changeCode1() {
+                $("#codeImg").attr("src", "code.do?t=" + genTimestamp());
+            }
+            function changeCode2() {
+                $("#zcodeImg").attr("src", "code.do?t=" + genTimestamp());
+            }
+    
+            
+            function check() {
+    
+                if ($("#loginname").val() == "") {
+                    $("#loginname").tips({
+                        side : 2,
+                        msg : 'Name cannot be empty',
+                        bg : '#AE81FF',
+                        time : 3
+                    });
+                    showfh();
+                    $("#loginname").focus();
+                    return false;
+                } else {
+                    $("#loginname").val(jQuery.trim($('#loginname').val()));
+                }
+                if ($("#password").val() == "") {
+                    $("#password").tips({
+                        side : 2,
+                        msg : 'Password cannot be empty',
+                        bg : '#AE81FF',
+                        time : 3
+                    });
+                    showfh();
+                    $("#password").focus();
+                    return false;
+                }
+                if ($("#code").val() == "") {
+                    $("#code").tips({
+                        side : 1,
+                        msg : 'Verification code cannot be empty',
+                        bg : '#AE81FF',
+                        time : 3
+                    });
+                    showfh();
+                    $("#code").focus();
+                    return false;
+                }
+                $("#loginbox").tips({
+                    side : 1,
+                    msg : 'Signing in, please wait...',
+                    bg : '#68B500',
+                    time : 10
+                });
+    
+                return true;
+            }
+    
+            function savePaw() {
+                if (!$("#saveid").attr("checked")) {
+                    $.cookie('loginname', '', {
+                        expires : -1
+                    });
+                    $.cookie('password', '', {
+                        expires : -1
+                    });
+                    $("#loginname").val('');
+                    $("#password").val('');
+                }
+            }
+    
+            function saveCookie() {
+                if ($("#saveid").attr("checked")) {
+                    $.cookie('loginname', $("#loginname").val(), {
+                        expires : 7
+                    });
+                    $.cookie('password', $("#password").val(), {
+                        expires : 7
+                    });
+                }
+            }
+            
+            jQuery(function() {
+                var loginname = $.cookie('loginname');
+                var password = $.cookie('password');
+                if (typeof(loginname) != "undefined"
+                        && typeof(password) != "undefined") {
+                    $("#loginname").val(loginname);
+                    $("#password").val(password);
+                    $("#saveid").attr("checked", true);
+                    $("#code").focus();
+                }
+            });
+            
+            function changepage(value) {
+                if(value == 1){
+                    $("#windows1").hide();
+                    $("#windows2").show();
+                    changeCode2();
+                }else{
+                    $("#windows2").hide();
+                    $("#windows1").show();
+                    changeCode1();
+                }
+            }
+            
+        function rcheck(){
+            if($("#USERNAME").val()==""){
+                $("#USERNAME").tips({
+                    side:3,
+                    msg:'Enter name',
+                    bg:'#AE81FF',
+                    time:2
+                });
+                $("#USERNAME").focus();
+                $("#USERNAME").val('');
+                return false;
+            }else{
+                $("#USERNAME").val(jQuery.trim($('#USERNAME').val()));
+            }
+            if($("#PASSWORD").val()==""){
+                $("#PASSWORD").tips({
+                    side:3,
+                    msg:'enter password',
+                    bg:'#AE81FF',
+                    time:2
+                });
+                $("#PASSWORD").focus();
+                return false;
+            }
+            if($("#PASSWORD").val()!=$("#chkpwd").val()){
+                $("#chkpwd").tips({
+                    side:3,
+                    msg:'Two passwords are different',
+                    bg:'#AE81FF',
+                    time:3
+                });
+                $("#chkpwd").focus();
+                return false;
+            }
+            if($("#name").val()==""){
+                $("#name").tips({
+                    side:3,
+                    msg:'   Enter ID numbers',
+                    bg:'#AE81FF',
+                    time:3
+                });
+                $("#name").focus();
+                return false;
+            }
+            if($("#EMAIL").val()==""){
+                $("#EMAIL").tips({
+                    side:3,
+                    msg:'Enter the license plate number',
+                    bg:'#AE81FF',
+                    time:3
+                });
+                $("#EMAIL").focus();
+                return false;
+            }else if(!ismail($("#EMAIL").val())){
+                $("#EMAIL").tips({
+                    side:3,
+                    msg:'License plate number format is incorrect',
+                    bg:'#AE81FF',
+                    time:3
+                });
+                $("#EMAIL").focus();
+                return false;
+            }
+            if ($("#rcode").val() == "") {
+                $("#rcode").tips({
+                    side : 1,
+                    msg : 'Verification code cannot be empty',
+                    bg : '#AE81FF',
+                    time : 3
+                });
+                $("#rcode").focus();
+                return false;
+            }
+            return true;
+        }
+        
+        function register(){
+            if(rcheck()){
+                var nowtime = date2str(new Date(),"yyyyMMdd");
+                $.ajax({
+                    type: "POST",
+                    url: 'appSysUser/registerSysUser.do',
+                    data: {USERNAME:$("#USERNAME").val(),PASSWORD:$("#PASSWORD").val(),NAME:$("#name").val(),EMAIL:$("#EMAIL").val(),rcode:$("#rcode").val(),FKEY:$.md5('USERNAME'+nowtime+',fh,'),tm:new Date().getTime()},
+                    dataType:'json',
+                    cache: false,
+                    success: function(data){
+                        if("00" == data.result){
+                            $("#windows2").hide();
+                            $("#windows1").show();
+                            $("#loginbox").tips({
+                                side : 1,
+                                msg : 'Registration is successful, please login',
+                                bg : '#68B500',
+                                time : 3
+                            });
+                            changeCode1();
+                        }else if("04" == data.result){
+                            $("#USERNAME").tips({
+                                side : 1,
+                                msg : "Username already exists",
+                                bg : '#FF5080',
+                                time : 15
+                            });
+                            showfh();
+                            $("#USERNAME").focus();
+                        }else if("06" == data.result){
+                            $("#rcode").tips({
+                                side : 1,
+                                msg : "Verification code input is incorrect",
+                                bg : '#FF5080',
+                                time : 15
+                            });
+                            showfh();
+                            $("#rcode").focus();
+                        }
+                    }
+                });
+            }
+        }
+        
+        
+        function ismail(mail){
+            return(new RegExp(/^(?:[a-zA-Z0-9]+[_\-\+\.]?)*[a-zA-Z0-9]+@(?:([a-zA-Z0-9]+[_\-]?)*[a-zA-Z0-9]+\.)+([a-zA-Z]{2,})+$/).test(mail));
+        }
+        //js  
+        </script>
+        <script src="{% static '/login/js/bootstrap.min.js' %}"></script>
+        <script src="{% static '/js/jquery-1.7.2.js' %}"></script>
+        <script src="{% static '/login/js/jquery.easing.1.3.js' %}"></script>
+        <script src="{% static '/login/js/jquery.mobile.customized.min.js' %}"></script>
+        <script src="{% static '/login/js/camera.min.js' %}"></script>
+        <script src="{% static '/login/js/templatemo_script.js' %}"></script>
+        <script src="{% static '/login/js/ban.js' %}"></script>
+        <script type="text/javascript" src="{% static '/js/jQuery.md5.js' %}"></script>
+        <script type="text/javascript" src="{% static '/js/jquery.tips.js' %}"></script>
+        <script type="text/javascript" src="{% static '/js/jquery.cookie.js' %}"></script>
+        
+        <!--  -->
+        <script type="text/javascript" src="{% static '/login/keypad/js/form/keypad.js' %}"></script>
+        <script type="text/javascript" src="{% static '/login/keypad/js/framework.js' %}"></script>
+        <!-- -->
+    </body>
+</html>

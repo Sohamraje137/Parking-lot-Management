@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Parking system|
+{% endblock %}
+{% load staticfiles %}
+{% block content %}
+
+<div style="width:100%;text-align: center;margin: 0 auto;position: absolute;">
+        <div id="windows1">
+        <div id="loginbox">
+               
+            <h1  style="color:white"> Choose the site nearest to you </h1>
+            <table class="table">
+                    <thead>                        
+                                
+                    </thead>
+                    <tbody>
+                        {% for item in positions_list %}
+                        <td>
+                            <h4 > <a style="color:white" href="/carposition/book/{{ item.pk }}"> {{ item.site_address}}</a> </h4>
+                        </td>
+                        {% endfor %}
+                    </tbody>
+            </table>                    
+        </div>        
+    </div>            
+</div>
+
+<div id="templatemo_banner_slide" class="container_wapper">
+    <div class="camera_wrap camera_emboss" id="camera_slide">
+        <div data-src="{% static '/login/images/banner_slide_01.jpg' %}"></div>
+        <div data-src="{% static '/login/images/banner_slide_02.jpg'  %}"></div>
+        <div data-src="{% static '/login/images/banner_slide_03.jpg'  %}"></div>
+        <div data-src="{% static '/login/images/banner_slide_04.jpg'  %}"></div>
+        <div data-src="{% static '/login/images/banner_slide_05.jpg'  %}"></div>
+    </div>
+</div>
+
+{% endblock %}

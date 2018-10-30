@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Parking system|Register
+{% endblock %}
+{% load staticfiles %}
+{% block content %}
+<canvas class="cavs"></canvas>
+<div style="width:100%;text-align: center;margin: 0 auto;position: absolute;">
+    <div id="windows1">
+    <div id="loginbox" >
+            {% if form.errors %}
+            <p>Your username or email or car number is already taken. Please try again.</p>
+          {% endif %}
+        
+        <form action="" method="post" name="loginForm" id="loginForm">
+            {% csrf_token %}
+            <div class="control-group normal_text">					
+                <h3 style="text-align:center";style="font-family:verdana;color:white;font-size:40px;">
+                    Residential parking lot intelligent management system
+                </h3>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <div class="main_input_box">
+                        <span class="add-on bg_lg">
+                        <i><img height="37" src="{% static '/login/user.png' %}" /></i>
+                        </span><input type="text" name="username" required id="id_username" id="loginname" value="" placeholder="Please type in your name" />
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <span class="add-on bg_lg">
+                            <i><img height="37" src="{% static '/login/user.png' %}" /></i>
+                            </span><input type="email" name="email"  required required id="id_username" id="id_email" value="" placeholder="please input your email" />
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                        <div class="controls">
+                            <div class="main_input_box">
+                                <span class="add-on bg_ly">
+                                <i><img height="37" src="{% static '/login/suo.png' %}" /></i>
+                                </span><input type="text" name="idcar" required id="idcar" id="loginname" placeholder="Please enter your Car ID card" class="keypad" keypadMode="full" allowKeyboard="true" value=""/>
+                            </div>
+                        </div>
+                    </div>
+            <div class="control-group">
+                <div class="controls">
+                    <div class="main_input_box">
+                        <span class="add-on bg_ly">
+                        <i><img height="37" src="{% static '/login/suo.png' %}" /></i>
+                        </span><input type="password" name="password" required id="id_password" id="password" placeholder="Please enter your password" class="keypad" keypadMode="full" allowKeyboard="true" value=""/>
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <span class="add-on bg_ly">
+                            <i><img height="37" src="{% static '/login/suo.png' %}" /></i>
+                            </span><input type="password" name="password_again" id="id_password_again" required placeholder="Enter the password again" class="keypad" keypadMode="full" allowKeyboard="true" value=""/>
+                        </div>
+                    </div>
+                </div>
+            
+            <div style="float:right;padding-right:10%;">
+                <div style="float: left;margin-top:3px;margin-right:2px;">
+                    <font color="white">Remember password</font>
+                </div>
+                <div style="float: left;">
+                    <input name="form-field-checkbox" id="saveid" type="checkbox"
+                        onclick="savePaw();" style="padding-top:0px;" />
+                </div>
+            </div>
+            <div class="form-actions">
+                <div style="width:86%;padding-left:8%;">                    
+                    </c:if>
+                    <span class="pull-right"><input onclick="severCheck();" class="flip-link btn btn-info" id="to-recover" type="submit" value="registered">Submit</span>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+    
+    
+    
+</div>
+
+<div id="templatemo_banner_slide" class="container_wapper">
+    <div class="camera_wrap camera_emboss" id="camera_slide">
+        <!-- Background picture -->
+        <div data-src="{% static '/login/images/banner_slide_01.jpg' %}"></div>
+        <div data-src="{% static '/login/images/banner_slide_02.jpg'  %}"></div>
+        <div data-src="{% static '/login/images/banner_slide_03.jpg'  %}"></div>
+        <div data-src="{% static '/login/images/banner_slide_04.jpg'  %}"></div>
+        <div data-src="{% static '/login/images/banner_slide_05.jpg'  %}"></div>
+    </div>
+    <!-- #camera_wrap_3 -->
+</div>
+<!-- <form action="" method="POST">
+    {% csrf_token %}
+    {% for field in login_form %}
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        <p>{{ field.errors.as_text }}</p>
+    {% endfor %}
+    <span>{{ login_form.non_field_errors }}</span>
+    <input type="submit" value="登录">
+</form> -->
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Parking system|User Profile
+{% endblock %}
+
+{% block content %}
+<h3>Current user:{{ user.username}}</h3>
+<form action="" method="POST">
+    {% csrf_token %}
+    {% for field in user_form %}
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        <p >{{ field.errors.as_text }}</p>
+    {% endfor %}
+    <span>{{ user_form.non_field_errors }}</span>
+    <input type="submit" value="registered">
+</form>
+{% endblock %}
