@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib import auth
 from django.contrib.auth.models import User
+from carposition.models import Positions
 from users.models import UserInfo
 from users.forms import LoginForm, RegForm, UserDetailForm
 
@@ -12,9 +13,9 @@ from users.forms import LoginForm, RegForm, UserDetailForm
 # Create your views here.
 
 def home(request):
-    # car_positions = CarPosition.objects.filter(position_status=True)
+    car_positions =Positions.objects.filter(position_status=True)
     context = {}
-    # context['car_pos_num'] = car_positions.count()
+    context['car_pos_num'] = car_positions.count()
     return render(request,'home.html',context)
 
 def login(request):

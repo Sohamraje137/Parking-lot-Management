@@ -23,11 +23,12 @@ Parking system|
        
                                                     <h4 > {{ item.site_address}}  </h4>
                                                     {% for choice in item.positions_set.all %}
-                                                    <h4 > <a style="color:white" href="/carposition/order_position/{{ item.site_no}}/{{  choice.position_num }}"> {{ choice.position_num}}</a> </h4>
+                                                        {% if choice.position_status    %} 
+                                                            <h4 > <a style="color:white" href="/carposition/order_position/{{ item.site_no}}/{{  choice.position_num }}"> {{ choice.position_num}}</a> </h4>
+                                                        {% endif %}
                                                     {% endfor %}
                                                 {% endfor %}
                                                 <span>{{ user_form.non_field_errors }}</span>
-                                                <input type="submit" value="register">
                                             </form>
                                 
                     </tbody>

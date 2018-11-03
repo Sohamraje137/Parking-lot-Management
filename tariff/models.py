@@ -4,6 +4,7 @@ from django.db import models
 from users.models import UserInfo
 # Create your models here.
 
+
 class Tariffs(models.Model):
     # user = models.ForeignKey(UserInfo,on_delete=models.CASCADE)
     user_name = models.CharField(u'user_name',default='abc',max_length = 20)
@@ -30,3 +31,14 @@ class Tickets(models.Model):
     class Meta:
         verbose_name = 'Charge type'
         verbose_name_plural = 'Charge type'
+
+
+class Rates(models.Model):
+    site_add =models.CharField(u'Site Address',default='',max_length = 20)
+    pay_per_time= models.FloatField(u'Pay charges', default='40.00')
+    def __str__(self):
+        return u'%s' % self.site_add  
+   
+    class Meta:
+        verbose_name = 'Rates'
+        verbose_name_plural = 'Rates'

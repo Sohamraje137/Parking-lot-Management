@@ -3,14 +3,32 @@ import csv
 from djqscsv import render_to_csv_response
 from django.shortcuts import render
 from django.http import HttpResponse
-from tariff.models import Tariffs
+from tariff.models import Tariffs,Rates
 # Create your views here.
 
 def index(request):
     return HttpResponse(u'Here is the ticketing center')
 
+def download_list(request):
+    qs = Rates.objects.all()
+    return render_to_csv_response(qs,filename=u'Rates.csv')
+    # qs = Tariffs.objects.get()
+    # return render_to_csv_response(qs,filename=u'tariffs.csv')
+
+def download_personal_csv(request,username):
+    query=Tariffs.objects.filter(user_name=username)
+    print(query)
+    # print(query.car_number)
+    # print(query.start_time)
+    return render_to_csv_response(query,filename=u'Bill.csv')
+
 def download_csv(request):
-    # Create the HttpResponse object with the appropriate CSV header.
+    qs = Tariffs.objects.all()
+    return render_to_csv_response(qs,filename=u'tariffs.csv')
+
+
+
+        # Create the HttpResponse object with the appropriate CSV header.
     # response = HttpResponse(content_type='text/csv')
     # response['Content-Disposition'] = 'attachment; filename="tariff.csv"'
 
@@ -18,5 +36,3 @@ def download_csv(request):
     # writer.writerow(['First row', 'Foo', 'Bar', 'Baz'])
     # writer.writerow(['Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"])
     # qs = Tariffs.objects.values('user_name','car_number')
-    qs = Tariffs.objects.all()
-    return render_to_csv_response(qs,filename=u'tariffs.csv')
