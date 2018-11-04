@@ -1,21 +1,35 @@
 from django.shortcuts import render,redirect
-
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import auth
 from django.contrib.auth.models import User
 from carposition.models import Positions
 from users.models import UserInfo
 from users.forms import LoginForm, RegForm, UserDetailForm
+from django.conf import settings
 
 #from carposition.models import CarPosition
 
 # Create your views here.
 
 def home(request):
+    print("HI")
+
     car_positions =Positions.objects.filter(position_status=True)
-    context = {}
-    context['car_pos_num'] = car_positions.count()
+    car_pos_num = car_positions.count()
+
+    if request.user.is_authenticated :
+        User_info = UserInfo.objects.get(user_name=request.user)
+        context = {
+        'User_info': User_info,
+        'car_pos_num' : car_pos_num
+    }
+    #user_status= User_info.car_booking_status
+    else:
+        context = {
+            'car_pos_num' : car_pos_num
+    }
+
     return render(request,'home.html',context)
 
 def login(request):
@@ -39,8 +53,9 @@ def register(request):
             email = reg_form.cleaned_data['email']
             password = reg_form.cleaned_data['password']
             # Create user
-
+           
             user = User.objects.create_user(username, email, password)
+            print(user.username)
             user.save()
             # Login user
 
@@ -58,9 +73,11 @@ def user_detail(request):
         user_form = UserDetailForm(request.POST)
         if user_form.is_valid() and (request.user is not None):
             # Add user information
-
+            print("Hello")
             user_info = UserInfo()
+            print("Hi")
             user_info.user_name = request.user.username
+            user_info.user_first_name= user_form.cleaned_data['user_first_name']
             user_info.user_phone = user_form.cleaned_data['user_phone']
             user_info.car_number = user_form.cleaned_data['car_number']
             user_info.car_type = user_form.cleaned_data['car_type']
@@ -73,3 +90,8 @@ def user_detail(request):
     context = {}
     context['user_form'] = user_form
     return render(request,'user_detail.html',context)
+
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect(settings.LOGIN_URL)
+

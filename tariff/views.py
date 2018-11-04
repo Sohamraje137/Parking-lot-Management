@@ -4,6 +4,9 @@ from djqscsv import render_to_csv_response
 from django.shortcuts import render
 from django.http import HttpResponse
 from tariff.models import Tariffs,Rates
+from django.conf import settings
+from django.shortcuts import redirect
+
 # Create your views here.
 
 def index(request):
@@ -16,6 +19,9 @@ def download_list(request):
     # return render_to_csv_response(qs,filename=u'tariffs.csv')
 
 def download_personal_csv(request,username):
+    if not request.user.is_authenticated:
+        return redirect('/users/home')
+ 
     query=Tariffs.objects.filter(user_name=username)
     print(query)
     # print(query.car_number)

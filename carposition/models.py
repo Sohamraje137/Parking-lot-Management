@@ -14,7 +14,7 @@ class Site(models.Model):
 class Positions(models.Model):
     site_no= models.ForeignKey(Site, on_delete=models.CASCADE)
     position_num = models.CharField('Parking number',max_length=20,default='')
-    position_status = models.BooleanField('Parking status [default is idle]',default=True)
+    position_status = models.BooleanField('Parking status [default is unoccupied]',default=True)
     def __str__(self):
       return self.position_num
 

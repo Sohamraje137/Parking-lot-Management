@@ -6,5 +6,5 @@ from .models import UserInfo
 
 @admin.register(UserInfo)
 class UserInfoAdmin(admin.ModelAdmin):
-    list_display = ('pk','user_name','car_number','car_type','car_color')
-    # exclude = ('user_name','car_number',)
+    list_display = ('pk','user_first_name','user_name','user_phone','car_number','car_booking_status','car_type','car_color','car_comapany')
+    # exclude = ('user_name','car_number')

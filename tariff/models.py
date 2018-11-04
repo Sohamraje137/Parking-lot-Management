@@ -20,8 +20,8 @@ class Tariffs(models.Model):
         return u'%s' % self.ticket_type
     
     class Meta:
-        verbose_name = 'Ticket Center'
-        verbose_name_plural = 'Ticket center'
+        verbose_name = 'Tariffs Center'
+        verbose_name_plural = 'Tariffs center'
 
 class Tickets(models.Model):
     TICKET_TYPE_CHOICES=(('Hour',u'Hour ticket'),)
@@ -29,8 +29,8 @@ class Tickets(models.Model):
     per_hour_money = models.FloatField(verbose_name=u'Hourly parking fee',default=10.0,editable=True)
     
     class Meta:
-        verbose_name = 'Charge type'
-        verbose_name_plural = 'Charge type'
+        verbose_name = 'Tickets'
+        verbose_name_plural = 'Tickets'
 
 
 class Rates(models.Model):
