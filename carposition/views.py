@@ -4,23 +4,29 @@ from .models import Site,Positions
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from users.models import UserInfo
-from tariff.models import Tariffs,Tickets
+from tariff.models import Tariffs,Tickets,Rates
 import time
 import random
 from djqscsv import render_to_csv_response
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.conf import settings
-
 # Create your views here.
 
 def car_site_index(request):#,site_num):
     # site_no = get_object_or_404(Site, site_num=site_num)
     if not request.user.is_authenticated:
         return redirect('/users/home')
+    rates= Rates.objects.filter()
     positions_list = Site.objects.filter()#(position_status=True)
-    context = {}
-    context['positions_list']=positions_list
+    for rate in rates:
+        print(rate.pay_per_time)
+    zipped_data=zip(positions_list, rates)
+    context = {
+        'rates': rates,
+        'positions_list':positions_list,
+        'zipped_data':zipped_data
+    }
     return render(request,'car_site_index.html',context)
 
 def site_position_book(request,site_no):
@@ -28,6 +34,7 @@ def site_position_book(request,site_no):
     if not request.user.is_authenticated:
         return redirect('/users/home')
     positions_list = Site.objects.filter(site_no=site_no)# and status_list.site_no=site_no and status_list.position_status=True )
+    
     context = {
         'site_no':site_no
     }

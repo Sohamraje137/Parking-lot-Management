@@ -11,15 +11,26 @@ Parking system|
         <div id="loginbox">
                
             <h1  style="color:white"> Choose the site nearest to you </h1>
+               <!-- {% for rate in rates %}
+               <h4>  {{ rate.pay_per_time }}</h4>
+                {% endfor %} -->
             <table class="table">
                     <thead>                        
-                                
+                                <!--for i in [1,2,3], j in [3,2,1]:   print i,j 
+                                {% for x, y in one_and_two %}  {{x}}, {{y}}{% endfor %} -->
                     </thead>
                     <tbody>
-                        {% for item in positions_list %}
-                        <td>
-                            <h4 > <a style="color:white" href="/carposition/book/{{ item.pk }}"> {{ item.site_address}}</a> </h4>
-                        </td>
+                        {% for item,rate in zipped_data %}
+                        <tr>
+                            <td>
+                                <h4 > <a style="color:white" href="/carposition/book/{{ item.pk }}"> {{ item.site_address}}</a>   </h4>
+                            </td>
+                            
+                            <td>                    
+                                <h4 >  {{ rate.pay_per_time }}</h4>
+                            </td>
+                        </tr>
+                        
                         {% endfor %}
                     </tbody>
             </table>                    

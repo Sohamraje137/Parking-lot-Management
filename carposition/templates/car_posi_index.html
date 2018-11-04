@@ -11,6 +11,10 @@ Parking system|
         <div id="loginbox">
                
             <h1  style="color:white"> Choose the site nearest to you  {{ position_list.site_address }}</h1>
+
+            
+
+                      
             <table class="table">
                     <thead>                        
                                 
@@ -24,8 +28,13 @@ Parking system|
                                                     <h4 > {{ item.site_address}}  </h4>
                                                     {% for choice in item.positions_set.all %}
                                                         {% if choice.position_status    %} 
-                                                            <h4 > <a style="color:white" href="/carposition/order_position/{{ item.site_no}}/{{  choice.position_num }}"> {{ choice.position_num}}</a> </h4>
+                                                            <h4 > <a style="color:white" href="/carposition/order_position/{{ item.site_no}}/{{  choice.position_num }}"> {{ choice.position_num}}</a> Unoccupied </h4>
+
+                                                        {% else %}
+                                                        <h4 > <a style="color:white" href="/carposition/order_position/{{ item.site_no}}/{{  choice.position_num }}"> {{ choice.position_num}}</a> Occupied </h4>
+
                                                         {% endif %}
+
                                                     {% endfor %}
                                                 {% endfor %}
                                                 <span>{{ user_form.non_field_errors }}</span>

@@ -60,8 +60,9 @@ Parking system|Home
             <div>
 
                  
-                <p class="normal_text">Current remaining parking spaces:<b> {{ car_pos_num }} </b>个</p>
-                {% if user.is_authenticated and  not user.is_superuser and not User_info.car_booking_status %}
+                <p class="normal_text">Current remaining parking spaces:<b> {{ car_pos_num }} </b>个</p> 
+                <!-- and not User_info.car_booking_status -->
+                {% if user.is_authenticated and  not user.is_superuser  %}
                     <a class="normal_text" href="/carposition/index" type="button" >Booking parking space</a>        
                 {% elif not user.is_authenticated %}
                     <a class="normal_text" type="button" disabled="disabled">Booking parking space [not logged in]</a>
