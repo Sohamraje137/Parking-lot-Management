@@ -41,8 +41,37 @@ hr{ border-top-color:#dadada;}
 
 body {   padding: 0;    margin-top:0px;margin: 0px;} 
 /*body {background-image:url("1.jpg");   padding: 0;    margin-top:10%;} */
+#heading {
+  margin-bottom: 30px; 
+  margin-top: 100px;
+  font-size: 200px;
+  color: white;
+  font-weight: bold;
+  background-color: rgba(0,0,0, 0.4);
+  height : 140px;
+  width : 95%;
+  padding-top: 60px; 
+  border: 3px solid #f1f1f1;
+  border-right: 3px solid #f1f1f1;
+}
+#butn {
+	display : inline-block;
+	width : 95%;
+}
+.buttons {
+	display : inline-block;
+	height : 30px;
+	width : 20%;
+	border: 1px solid #f1f1f1;
+	background-color: rgba(0,0,0, 0.4);
+	padding-top: 10px;
+	margin-right: 10px;
+}
+#homebg {filter: blur(4px);
+  -webkit-filter: blur(4px);width:100%; height : 100% ; text-align: center;margin: 0 auto;position: absolute;background: url(images/homebg.jpg); background-size: cover;}
 
-#logo, #loginbox {    width: 32%;    margin-left: auto;  margin-right: auto;   position: relative;}
+#logo, #loginbox {    filter: blur(0px);
+  -webkit-filter: blur(0px);width: 60%;    margin-left: auto;  margin-right: auto;   position: relative;}
 #logo img {  margin: 0 auto;    display: block;}
 #loginbox { overflow: hidden !important; z-index: 100;  text-align: center;  position: relative; margin-top:1%;}
 
@@ -58,7 +87,7 @@ body {   padding: 0;    margin-top:0px;margin: 0px;}
 #loginbox .main_input_box .add-on{  padding:9.9px 9px; *line-height:31px; color:#fff;  width:30px; display:inline-block;}
 #loginbox .main_input_box input{ height:30px; border:0px; display:inline-block; width:75%; line-height:28px;  margin-bottom:3px;}
 #loginbox .controls{ padding:0 20px;}
-#loginbox .control-group{ padding:20px 0; margin-bottom:0px;}
+#loginbox .control-group{ padding:20px 0; margin-bottom:0px; height: 30px;}
 .form-vertical, .form-actions {  margin-bottom: 0; background:none; border-top:1px solid #3f4954; }
 
 /* #loginbox .normal_text{ padding:15px 10px; text-align:center; font-size:14px; line-height:20px; background:#2E363F; color:#fff; } */
@@ -73,4 +102,42 @@ body {   padding: 0;    margin-top:0px;margin: 0px;}
 #logo { width: 40%; }
 #loginbox{ width:90%}
 #loginbox .control-group{ padding:8px 0; margin-bottom:0px;}
+}
+
+#loginbg {
+	background: url(images/loginbg.jpg); 
+	background-size: cover;
+	filter: blur(4px);
+  	-webkit-filter: blur(4px);
+}
+
+#regbg {
+	background: url(images/regbg.jpg); 
+	background-size: cover;
+	filter: blur(4px);
+  	-webkit-filter: blur(4px);
+}
+
+#sitebg {
+	background: url(images/homebg.jpg); 
+	background-size: cover;
+	filter: blur(4px);
+  	-webkit-filter: blur(4px);
+}
+
+#posbg {
+	background: url(images/homebg.jpg); 
+	background-size: cover;
+	filter: blur(4px);
+  	-webkit-filter: blur(4px);
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.grid-item {
+	margin: 10px;
+	border: 1px solid #f1f1f1;
 }

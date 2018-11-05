@@ -5,29 +5,31 @@ Parking system|
 {% endblock %}
 {% load staticfiles %}
 {% block content %}
-
-<div style="width:100%;text-align: center;margin: 0 auto;position: absolute;">
-        <div id="windows1">
-        <div id="loginbox">
+<div id="sitebg" style="width:100%;height: 110%; text-align: center;margin: 0 auto;position: absolute;"></div>
+<div>
+    <div id="windows1">
+        <div style="height: 50px;"></div>
+        <div id="loginbox" style=" border: 1px solid #f1f1f1;background-color: rgba(0,0,0, 0.4); padding: 20px;">
                
-            <h1  style="color:white"> Choose the site nearest to you </h1>
+            <h1  style="color:white ; margin-bottom: 50px;"> Choose the site nearest to you </h1>
                <!-- {% for rate in rates %}
                <h4>  {{ rate.pay_per_time }}</h4>
                 {% endfor %} -->
             <table class="table">
                     <thead>                        
-                                <!--for i in [1,2,3], j in [3,2,1]:   print i,j 
-                                {% for x, y in one_and_two %}  {{x}}, {{y}}{% endfor %} -->
+                            <i class="fas fa-warehouse" style="font-size: 50px; color: white ;float : left ; padding-bottom: 20px;padding-left: 170px;"></i>
+                            <i class="fas fa-dollar-sign" style="font-size: 50px; color: white ;float : right ; padding-bottom: 20px;padding-right: 210px;"></i>
                     </thead>
                     <tbody>
+
                         {% for item,rate in zipped_data %}
                         <tr>
                             <td>
-                                <h4 > <a style="color:white" href="/carposition/book/{{ item.pk }}"> {{ item.site_address}}</a>   </h4>
+                                <h4 style="padding-left: 150px; "> <a style="color:white" href="/carposition/book/{{ item.pk }}"> {{ item.site_address}}</a>   </h4>
                             </td>
                             
                             <td>                    
-                                <h4 >  {{ rate.pay_per_time }}</h4>
+                                <h4 style="color:white ; float: right ; padding-right: 150px;">  Rs. {{ rate.pay_per_time }}/hour</h4>
                             </td>
                         </tr>
                         
@@ -38,7 +40,7 @@ Parking system|
     </div>            
 </div>
 
-<div id="templatemo_banner_slide" class="container_wapper">
+<!-- <div id="templatemo_banner_slide" class="container_wapper">
     <div class="camera_wrap camera_emboss" id="camera_slide">
         <div data-src="{% static '/login/images/banner_slide_01.jpg' %}"></div>
         <div data-src="{% static '/login/images/banner_slide_02.jpg'  %}"></div>
@@ -46,6 +48,6 @@ Parking system|
         <div data-src="{% static '/login/images/banner_slide_04.jpg'  %}"></div>
         <div data-src="{% static '/login/images/banner_slide_05.jpg'  %}"></div>
     </div>
-</div>
+</div> -->
 
 {% endblock %}

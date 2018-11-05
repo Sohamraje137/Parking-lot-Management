@@ -6,20 +6,35 @@ Parking system|Home
 {% load staticfiles %}
 {% block content %}
 
-<div style="width:100%;text-align: center;margin: 0 auto;position: absolute;">
+<div id="homebg"></div>
+<div>
     <!--  -->
     
     <div id="windows1">
-        <div id="loginbox">
-            <h1>Welcome to the parking management system
+        <div id="loginbox" >
+        	<div  id="heading">
+        		<h1 style="font-size: 100px">Easy Park
             </h1>
+        	</div>
+            
             {% if user.is_authenticated %}
 
-            <h2 class="normal_text">Current user:{{ user.username }}</h2>
+            <h2 class="normal_text">Welcome {{ user.username }}, How can I help you?</h2>
             
             {% else %}
             <h4 class="normal_text">To use this system, please log in to this system first.
             </h4>
+            {% endif %}
+
+            {% if not user.is_authenticated %}
+            <div id="butn">
+                <div class="buttons">
+                    <a class="normal_text" href="{% url 'login' %}">Log-in</a>
+                </div>
+                <div class="buttons">
+                    <a class="normal_text" href="{% url 'register' %}">Register</a>
+                </div>
+            </div>
             {% endif %}
 
 
@@ -28,21 +43,7 @@ Parking system|Home
 
             {% endif %}
 
-            {% if user.is_superuser %}
-            <a class="normal_text" href="/admin" type="button" >Visit Admin Page</a>        
-            {% endif %}
-
-            {% if user.is_authenticated or user.is_superuser %}
-            <a class="normal_text" href="/tariff/rates" type="button" >Want to check the tariff rates?</a>        
-            
-            {% endif %}
-
-            {% if not user.is_authenticated %}
-           
-            <a class="normal_text" href="{% url 'login' %}">Log-in</a>
-            
-            <a class="normal_text" href="{% url 'register' %}">register</a>
-            {% endif %}
+        
 
 
             {% if  user.is_authenticated and not user.is_superuser  %}
@@ -51,38 +52,45 @@ Parking system|Home
             {% endif %}
 
             <div>
-                <p> </p>
 
             </div>
             {% if user.is_authenticated %}
-               <a class="normal_text" href="logout">Log-out</a>
-            {% endif %}
-            <div>
+            <div style="height: 50px; margin-top: 20px;">
+                <div style="display: inline;text-align: center; background: rgba(0,0,0, 0.4); padding: 10px 5px;margin-right: 40px;border: 1px solid #f1f1f1;">
 
-                 
-                <p class="normal_text">Current remaining parking spaces:<b> {{ car_pos_num }} </b>个</p> 
-                <!-- and not User_info.car_booking_status -->
-                {% if user.is_authenticated and  not user.is_superuser  %}
-                    <a class="normal_text" href="/carposition/index" type="button" >Booking parking space</a>        
-                {% elif not user.is_authenticated %}
-                    <a class="normal_text" type="button" disabled="disabled">Booking parking space [not logged in]</a>
-                {% endif %}
+                    {% if user.is_authenticated and  not user.is_superuser  %}
+
+                        <!-- <p class="normal_text">Current remaining parking spaces:<b> {{ car_pos_num }} </b>个</p> -->
+                        <a class="normal_text" href="/carposition/index" type="button" >Booking parking space</a>        
+                    {% endif %}
+                </div>
+                <div style="display: inline;text-align: center; background: rgba(0,0,0, 0.4); padding: 10px 5px; border: 1px solid #f1f1f1;">
+                  {% if user.is_authenticated %}
+                     <a class="normal_text" href="logout">Log-out</a>
+                  {% endif %}               
+                </div>
+
             </div>
+            {% endif %} 
+            
+        
+
+
         </div>        
     </div>
     </div>            
 </div>
 
-<div id="templatemo_banner_slide" class="container_wapper">
+<!-- <div id="templatemo_banner_slide" class="container_wapper">
     <div class="camera_wrap camera_emboss" id="camera_slide">
         <!-- Background picture -->
-        <div data-src="{% static '/login/images/banner_slide_01.jpg' %}"></div>
+       <!--  <div data-src="{% static '/login/images/banner_slide_01.jpg' %}"></div>
         <div data-src="{% static '/login/images/banner_slide_02.jpg'  %}"></div>
         <div data-src="{% static '/login/images/banner_slide_03.jpg'  %}"></div>
         <div data-src="{% static '/login/images/banner_slide_04.jpg'  %}"></div>
         <div data-src="{% static '/login/images/banner_slide_05.jpg'  %}"></div>
-    </div>
+    </div> -->
     <!-- #camera_wrap_3 -->
-</div>
+<!-- </div> -->
 
 {% endblock %}

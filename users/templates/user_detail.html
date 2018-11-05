@@ -3,18 +3,35 @@
 {% block title %}
 Parking system|User Profile
 {% endblock %}
-
+{% load staticfiles %}
 {% block content %}
-<h3>Current user:{{ user.username}}</h3>
-<form action="" method="POST">
-    {% csrf_token %}
-    {% for field in user_form %}
-        
-        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-        {{ field }}
-        <p >{{ field.errors.as_text }}</p>
-    {% endfor %}
-    <span>{{ user_form.non_field_errors }}</span>
-    <input type="submit" value="register">
-</form>
+
+<div  id="loginbg" style="width:100%;height: 100%;text-align: center;margin: 0 auto;position: absolute;">
+</div>
+<div style="height: 90px;"></div>
+<div>
+    <div id="windows1">
+    <div id="loginbox" >
+    		<form action="" method="POST" style="padding: 10px; color: white">
+    			<div style="text-align: center; color: white ; margin-bottom: 30px;" > <h3>Welcome {{ user.username}}, fill out this information to complete the registration process</h3></div>
+		    {% csrf_token %}
+		    {% for field in user_form %}
+		    <div style="padding-left: 100px;">
+		    	<div style="display: inline; float: left; width: 200px; text-align: right;">
+		    		<label style="display: inline;" for="{{ field.id_for_label }}">{{ field.label }}</label>
+		    	</div>
+		    	<div style="display: inline; position: relative; left: -70px;">
+		    		{{ field }}
+		    	</div>
+		        <p >{{ field.errors.as_text }}</p>
+		    </div>
+		        
+		    {% endfor %}
+		    <span>{{ user_form.non_field_errors }}</span>
+		    <input type="submit" value="register">
+		</form>
+		
+	</div>
+	</div>
+</div>
 {% endblock %}

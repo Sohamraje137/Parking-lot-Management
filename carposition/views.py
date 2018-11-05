@@ -11,6 +11,7 @@ from djqscsv import render_to_csv_response
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.conf import settings
+
 # Create your views here.
 
 def car_site_index(request):#,site_num):
@@ -34,9 +35,10 @@ def site_position_book(request,site_no):
     if not request.user.is_authenticated:
         return redirect('/users/home')
     positions_list = Site.objects.filter(site_no=site_no)# and status_list.site_no=site_no and status_list.position_status=True )
-    
+    # site_name= Site.objects.filter(site_no=site_no).site_address
     context = {
-        'site_no':site_no
+        'site_no':site_no,
+        # 'site_name':site_name
     }
 
     print(positions_list)
@@ -72,4 +74,4 @@ def order_position(request,site_no,posi_num):
     tariff.parking_money = pt * ticket[0].per_hour_money
     tariff.save()    
 
-    return HttpResponse('Dear  {0} parking slot is reserved for you at: {1}'.format(request.user.username,position_object.position_num))
+    return render(request , 'bocked.html')

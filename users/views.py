@@ -7,11 +7,14 @@ from carposition.models import Positions
 from users.models import UserInfo
 from users.forms import LoginForm, RegForm, UserDetailForm
 from django.conf import settings
+from django.views.decorators.cache import cache_control
+
 
 #from carposition.models import CarPosition
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def home(request):
     print("HI")
 
@@ -67,7 +70,8 @@ def register(request):
     context = {}
     context['reg_form'] = reg_form
     return render(request, 'register.html', context)
-
+ 
+@login_required
 def user_detail(request):
     if request.method =='POST':
         user_form = UserDetailForm(request.POST)
@@ -91,6 +95,7 @@ def user_detail(request):
     context['user_form'] = user_form
     return render(request,'user_detail.html',context)
 
+@login_required
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(settings.LOGIN_URL)
