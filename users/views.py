@@ -7,27 +7,31 @@ from carposition.models import Positions
 from users.models import UserInfo
 from users.forms import LoginForm, RegForm, UserDetailForm
 from django.conf import settings
+from tariff.models import Tariffs
 from django.views.decorators.cache import cache_control
-
-
-#from carposition.models import CarPosition
 from django.contrib.auth.decorators import login_required
+import datetime
+import time
+from datetime import datetime, date, time, timedelta
 
-# Create your views here.
+
+
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
+
+
 def home(request):
     print("HI")
 
     car_positions =Positions.objects.filter(position_status=True)
     car_pos_num = car_positions.count()
 
-    if request.user.is_authenticated :
+    if request.user.is_authenticated and  not request.user.is_superuser :
         User_info = UserInfo.objects.get(user_name=request.user)
+        print(User_info.car_booking_status)
         context = {
         'User_info': User_info,
-        'car_pos_num' : car_pos_num
+        'car_pos_num' : car_pos_num,
     }
-    #user_status= User_info.car_booking_status
     else:
         context = {
             'car_pos_num' : car_pos_num
@@ -70,7 +74,7 @@ def register(request):
     context = {}
     context['reg_form'] = reg_form
     return render(request, 'register.html', context)
- 
+
 @login_required
 def user_detail(request):
     if request.method =='POST':
@@ -95,8 +99,34 @@ def user_detail(request):
     context['user_form'] = user_form
     return render(request,'user_detail.html',context)
 
+
 @login_required
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(settings.LOGIN_URL)
 
+def Checkoutuser(request):
+    UserInfolist = UserInfo.objects.values()
+
+    print(UserInfolist)
+    context={
+        'UserInfolist':UserInfolist
+    }
+
+    return render(request,'Checkoutuser.html',context)
+
+
+def emptyslot(request,username):
+    UserInfoobject = UserInfo.objects.get(user_name= username)
+    UserInfoobject.admin_bit= True
+    Tariffobject= Tariffs.objects.get(user_name=username)
+    Tariffobject.end_time = datetime.now()
+    print(datetime.now())
+    print(Tariffobject.start_time)
+    print(Tariffobject.end_time)
+    UserInfoobject.save()
+    Tariffobject.save()
+    context= {
+        'tariffobject':Tariffobject,
+    }
+    return render(request,'emptyslot.html',context)

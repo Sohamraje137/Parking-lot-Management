@@ -25,7 +25,7 @@ SECRET_KEY = 'gc^_$w@i0s=2j5vnp7$(&&6i9zrb65p%i3oc3xqwlp-#*$52-k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','928ee1a7.ngrok.io']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'tariff',
     'users',
     'carposition',
+    'Employee'
 ]
 
 MIDDLEWARE = [
@@ -108,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 

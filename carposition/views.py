@@ -11,6 +11,8 @@ from djqscsv import render_to_csv_response
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.conf import settings
+import time
+from datetime import datetime, date, time, timedelta
 
 # Create your views here.
 
@@ -58,20 +60,36 @@ def order_position(request,site_no,posi_num):
     position_object.position_status = False
     position_object.save()
 
+    Siteobject = Site.objects.get(site_no=site_no)
     user_info = User.objects.get(username=request.user) #Get user information
     ticket = Tickets.objects.order_by('-per_hour_money')
     tariff = Tariffs()
     tariff.user_name = request.user
+    
     UserInfoInstance = UserInfo.objects.get(user_name=user_info)
     print(UserInfoInstance.car_number)
     UserInfoInstance.car_booking_status = True
+    UserInfo.admin_bit=False
+    UserInfoInstance.car_site_address = Siteobject.site_address
+    UserInfoInstance.car_slot_no = position_object.position_num
+
     print(UserInfoInstance.car_booking_status)
     UserInfoInstance.save()
+    
     tariff.car_number = UserInfoInstance.car_number
     tariff.ticket_type = 'Hour'
-    pt = random.choice((0.5,1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0,5.5,6.0,6.5))
-    tariff.parking_time = pt #
-    tariff.parking_money = pt * ticket[0].per_hour_money
-    tariff.save()    
+    tariff.start_time= datetime.now()
+    tariff.end_time= datetime.now()
+
+    print(datetime.now())
+    print(tariff.start_time)
+    tariff.parking_time = 0
+    tariff.site_address = Siteobject.site_address
+    tariff.postion_no=position_object.position_num
+    tariff.per_hour_money = Siteobject.pay_per_time
+    tariff.parking_money= tariff.per_hour_money
+    print(tariff.per_hour_money)
+ 
+    tariff.save()       
 
     return render(request , 'bocked.html')

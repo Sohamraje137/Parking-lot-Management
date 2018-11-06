@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Parking system|Home
+{% endblock %}
+{% load staticfiles %}
+{% block content %}
+
+  <h1>Hello</h1>
+
+    {{query.user_name}}
+
+    <table class="table">
+            <thead>                        
+            </thead>
+            <tbody>
+                <tr>
+                    
+                    <td>                    </td>
+                    
+                    <td>                    
+                        <h4 >  {{ query.user_name }}</h4>
+                        <h4 >  {{ query.car_number }}</h4>
+                        <h4 >  {{ query.start_time }}</h4>
+                        <h4 >  {{ query.end_time }}</h4>
+                        <h4 >  {{ query.ticket_type }}</h4>
+                        <h4 >  {{ query.parking_time }}</h4>
+
+                        <h4 >  {{ query.parking_money }}</h4>
+                        <h4 >  {{ query.per_hour_money }}</h4>
+
+
+                    </td>
+                </tr>
+                
+                    
+            </tbody>
+    </table>          
+
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Parking system|Home
+{% endblock %}
+{% load staticfiles %}
+{% block content %}
+
+  <h1>Hello</h1>
+
+    <h1> you are checking out {{tariffobject.user_name}}</h1>
+
+    <table class="table">
+            <thead>                        
+            </thead>
+            <tbody>
+                <tr>
+                    
+                    <td>                    </td>
+                    
+                    <td>                    
+                        <h4 >  {{ tariffobject.user_name }}</h4>
+                        <h4 >  {{ tariffobject.car_number }}</h4>
+                        <h4 >  {{ tariffobject.start_time }}</h4>
+                        <h4 >  {{ tariffobject.end_time }}</h4>
+                        <h4 >  {{ tariffobject.ticket_type }}</h4>
+                        <h4 >  {{ tariffobject.parking_time }}</h4>
+
+                        <h4 >  {{ tariffobject.parking_money }}</h4>
+                        <h4 >  {{ tariffobject.per_hour_money }}</h4>
+
+
+                    </td>
+                </tr>
+                
+                    
+            </tbody>
+    </table>          
+
+
+{% endblock %}

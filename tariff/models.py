@@ -9,15 +9,17 @@ class Tariffs(models.Model):
     # user = models.ForeignKey(UserInfo,on_delete=models.CASCADE)
     user_name = models.CharField(u'user_name',default='abc',max_length = 20)
     car_number = models.CharField(u'Plate Number',max_length=20)
-    start_time = models.DateTimeField(u'In Time',auto_now_add=True)
-    end_time = models.DateTimeField(u'Out-Time',auto_now=True)
+    start_time = models.DateTimeField(u'In-Time',null=True)
+    end_time = models.DateTimeField(u'Out-Time',null=True)
     parking_time = models.FloatField(verbose_name='Parking time',default=0.0,editable=False,unique=False)
-    parking_money = models.FloatField(verbose_name=u'parking fee',default=0.0,editable=False)
+    parking_money = models.FloatField(verbose_name=u'Bill Amount',default=0.0,editable=False)
     TICKET_TYPE_CHOICES=(('Hour',u'Hour ticket'),    )
     ticket_type = models.CharField(u'Billing type',max_length=20,choices=TICKET_TYPE_CHOICES,unique=False)
-    per_hour_money = models.FloatField(verbose_name=u'Hourly parking fees',default=100.0,editable=True)
+    per_hour_money = models.FloatField(verbose_name=u'Parking fees',default=0.0,editable=True)
+    site_address= models.CharField(u'Site Address',max_length=20,default='Not Parked')
+    postion_no= models.CharField(u'Parking Site Number',max_length=20,default='Not Parked')
     def __str__(self):
-        return u'%s' % self.ticket_type
+        return u'%s' % self.user_name
     
     class Meta:
         verbose_name = 'Tariffs Center'

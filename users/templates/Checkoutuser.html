@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Parking system|Home
+{% endblock %}
+{% load staticfiles %}
+{% block content %}
+    <h1>Hello There</h1>
+    {% for userobject in UserInfolist  %}
+        <h4>        
+         {% if  userobject.car_booking_status %}       {{ userobject.user_name }}   ---- {{ userobject.car_booking_status }}---{{ userobject.car_site_address }}
+            ---{{ userobject.car_slot_no }}
+           <a href="emptyslot/{{userobject.user_name}}"> Clear parking </a>  {% endif %} </h4>
+                
+    <!-- {% for user in userobject %} car_site_address = models.CharField(u'Site Number',null=True)
+    car_slot_no -->
+
+    <!-- {% endfor %} -->
+    {% endfor %}
+
+{% endblock %}

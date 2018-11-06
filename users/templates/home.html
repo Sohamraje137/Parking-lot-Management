@@ -39,7 +39,8 @@ Parking system|Home
 
 
             {% if user.is_superuser %}
-            <a class="normal_text" href="/tariff/download_csv" type="button" >Want to check total billings</a>        
+            <a class="normal_text" href="/tariff/download_csv" type="button" >Want to check total billings</a> 
+            <a class="normal_text" href="users/Checkoutuser" type="button" >Checkout User</a>      
 
             {% endif %}
 
@@ -47,7 +48,7 @@ Parking system|Home
 
 
             {% if  user.is_authenticated and not user.is_superuser  %}
-            <a class="normal_text" href="/tariff/personal/{{ user.username}}">Check Bill</a>
+            <a class="normal_text" href="/tariff/bills/{{ user.username}}">Check Bill</a>
 
             {% endif %}
 
