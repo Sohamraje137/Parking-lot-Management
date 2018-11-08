@@ -1,5 +1,5 @@
 # Parking-lot-Management
-A website to manage parking lot of a city/area.
+A website to allow users to book and Admin to manage parking lot of a city/area.
 
 # dependcy
 1. Django (2.1.2)
@@ -8,4 +8,6 @@ A website to manage parking lot of a city/area.
 4. python3
 # usages
 ```
+python manage.py migrate
+
 python manage.py runserver
