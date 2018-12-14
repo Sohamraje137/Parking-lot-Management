@@ -28,12 +28,13 @@ def bills(request,username):
     
     # print(username)
     query=Tariffs.objects.get(user_name=username)
+    #    query=Tariffs.objects.all(user_name=username)
     # print(query.site_address)
     # print(query.user_name)
     # print('print start time')
     # print(query.start_time)
     # print(datetime.now())
-    # UserInfo
+    
     userinfoobject= UserInfo.objects.get( user_name = username)
     if not userinfoobject.admin_bit:
       query.end_time= datetime.now()
@@ -50,7 +51,6 @@ def bills(request,username):
     # print(query.start_time.minute)
     # print(query.end_time.second)
     # print(query.end_time.minute)
-
     # print(hoursspent)
     # delta = datetime.combine(date.today(), query.endtime) - datetime.combine(date.today(), query.start_time)
     # delta_hours = delta.days * 24 + delta.seconds / 3600.0

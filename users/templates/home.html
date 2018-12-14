@@ -61,7 +61,7 @@ Parking system|Home
             <div style="height: 50px; margin-top: 20px;">
                 <div style="display: inline;text-align: center; background: rgba(0,0,0, 0.4); padding: 10px 5px;margin-right: 40px;border: 1px solid #f1f1f1;">
 
-                    {% if user.is_authenticated and  not user.is_superuser  %}
+                    {% if user.is_authenticated and  not user.is_superuser and not User_info.car_booking_status %}
 
                         <!-- <p class="normal_text">Current remaining parking spaces:<b> {{ car_pos_num }} </b>个</p> -->
                         <a class="normal_text" href="/carposition/index" type="button" >Booking parking space</a>        

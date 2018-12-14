@@ -39,7 +39,9 @@ class Tickets(models.Model):
 
 
 class Rates(models.Model):
-    site_add =models.CharField(u'Site Address',default='',max_length = 20)
+    site_add= models.ForeignKey(Site, on_delete=models.CASCADE)
+
+    # site_add =models.CharField(u'Site Address',default='',max_length = 20)
     pay_per_time= models.FloatField(u'Pay charges', default='40.00')
     def __str__(self):
         return u'%s' % self.site_add  

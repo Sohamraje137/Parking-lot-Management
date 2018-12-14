@@ -26,6 +26,7 @@ def home(request):
     car_pos_num = car_positions.count()
 
     if request.user.is_authenticated and  not request.user.is_superuser :
+        print(request.user)
         User_info = UserInfo.objects.get(user_name=request.user)
         print(User_info.car_booking_status)
         context = {
