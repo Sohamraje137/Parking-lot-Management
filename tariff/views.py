@@ -34,7 +34,6 @@ def bills(request,username):
     # print('print start time')
     # print(query.start_time)
     # print(datetime.now())
-    
     userinfoobject= UserInfo.objects.get( user_name = username)
     if not userinfoobject.admin_bit:
       query.end_time= datetime.now()
