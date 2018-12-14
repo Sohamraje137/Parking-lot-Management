@@ -17,11 +17,13 @@ Parking system|Home
             </h1>
         	</div>
             
-            {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+            <h2 class="normal_text">Welcome {{ user.username }}</h2>
 
+            {% elif user.is_authenticated %}
             <h2 class="normal_text">Welcome {{ user.username }}, How can I help you?</h2>
             
-            {% else %}
+        
             <h4 class="normal_text">To use this system, please log in to this system first.
             </h4>
             {% endif %}

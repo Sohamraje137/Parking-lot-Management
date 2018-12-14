@@ -22,8 +22,8 @@ def car_site_index(request):#,site_num):
         return redirect('/users/home')
     rates= Rates.objects.filter()
     positions_list = Site.objects.filter()#(position_status=True)
-    for rate in rates:
-        print(rate.pay_per_time)
+    # for rate in rates:
+    #     print(rate.pay_per_time)
     zipped_data=zip(positions_list, rates)
     context = {
         'rates': rates,
@@ -43,7 +43,7 @@ def site_position_book(request,site_no):
         # 'site_name':site_name
     }
 
-    print(positions_list)
+    # print(positions_list)
     context['positions_list']=positions_list
     return render(request,'car_posi_index.html',context)
 
@@ -67,13 +67,13 @@ def order_position(request,site_no,posi_num):
     tariff.user_name = request.user
     
     UserInfoInstance = UserInfo.objects.get(user_name=user_info)
-    print(UserInfoInstance.car_number)
+    # print(UserInfoInstance.car_number)
     UserInfoInstance.car_booking_status = True
     UserInfo.admin_bit=False
     UserInfoInstance.car_site_address = Siteobject.site_address
     UserInfoInstance.car_slot_no = position_object.position_num
 
-    print(UserInfoInstance.car_booking_status)
+    # print(UserInfoInstance.car_booking_status)
     UserInfoInstance.save()
     
     tariff.car_number = UserInfoInstance.car_number
@@ -81,14 +81,14 @@ def order_position(request,site_no,posi_num):
     tariff.start_time= datetime.now()
     tariff.end_time= datetime.now()
 
-    print(datetime.now())
-    print(tariff.start_time)
+    # print(datetime.now())
+    # print(tariff.start_time)
     tariff.parking_time = 0
     tariff.site_address = Siteobject.site_address
     tariff.postion_no=position_object.position_num
     tariff.per_hour_money = Siteobject.pay_per_time
     tariff.parking_money= tariff.per_hour_money
-    print(tariff.per_hour_money)
+    # print(tariff.per_hour_money)
  
     tariff.save()       
 

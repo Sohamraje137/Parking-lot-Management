@@ -1,12 +1,15 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 from users.models import UserInfo
 # Create your models here.
+from carposition.models import Site,Positions
 
 
 class Tariffs(models.Model):
     # user = models.ForeignKey(UserInfo,on_delete=models.CASCADE)
+    # user_name = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,)
     user_name = models.CharField(u'user_name',default='abc',max_length = 20)
     car_number = models.CharField(u'Plate Number',max_length=20)
     start_time = models.DateTimeField(u'In-Time',null=True)
@@ -16,7 +19,7 @@ class Tariffs(models.Model):
     TICKET_TYPE_CHOICES=(('Hour',u'Hour ticket'),    )
     ticket_type = models.CharField(u'Billing type',max_length=20,choices=TICKET_TYPE_CHOICES,unique=False)
     per_hour_money = models.FloatField(verbose_name=u'Parking fees',default=0.0,editable=True)
-    site_address= models.CharField(u'Site Address',max_length=20,default='Not Parked')
+    site_address= models.CharField(u'',max_length=20,default='Not Parked')
     postion_no= models.CharField(u'Parking Site Number',max_length=20,default='Not Parked')
     def __str__(self):
         return u'%s' % self.user_name

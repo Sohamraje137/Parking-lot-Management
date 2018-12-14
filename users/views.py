@@ -20,7 +20,7 @@ from datetime import datetime, date, time, timedelta
 
 
 def home(request):
-    print("HI")
+    # print("HI")
 
     car_positions =Positions.objects.filter(position_status=True)
     car_pos_num = car_positions.count()
@@ -81,10 +81,9 @@ def user_detail(request):
         user_form = UserDetailForm(request.POST)
         if user_form.is_valid() and (request.user is not None):
             # Add user information
-            print("Hello")
+            # print("Hello")
             user_info = UserInfo()
-            print("Hi")
-            user_info.user_name = request.user.username
+            # print("Hi")
             user_info.user_first_name= user_form.cleaned_data['user_first_name']
             user_info.user_phone = user_form.cleaned_data['user_phone']
             user_info.car_number = user_form.cleaned_data['car_number']
@@ -108,7 +107,7 @@ def logout(request):
 def Checkoutuser(request):
     UserInfolist = UserInfo.objects.values()
 
-    print(UserInfolist)
+    # print(UserInfolist)
     context={
         'UserInfolist':UserInfolist
     }
@@ -119,11 +118,27 @@ def Checkoutuser(request):
 def emptyslot(request,username):
     UserInfoobject = UserInfo.objects.get(user_name= username)
     UserInfoobject.admin_bit= True
+    UserInfoobject.car_booking_status=False
     Tariffobject= Tariffs.objects.get(user_name=username)
     Tariffobject.end_time = datetime.now()
-    print(datetime.now())
-    print(Tariffobject.start_time)
-    print(Tariffobject.end_time)
+
+    # print(datetime.now())
+    # print(Tariffobject.start_time)
+    # print(Tariffobject.end_time)
+    Positionobject= Positions.objects.get(position_num =Tariffobject.postion_no)
+    Positionobject.position_status=True
+    
+    st_sec = Tariffobject.start_time.second + Tariffobject.start_time.minute*60 + Tariffobject.start_time.hour*24*60
+    et_sec = Tariffobject.end_time.second+ Tariffobject.end_time.minute*60 + Tariffobject.end_time.hour*24*60
+    hoursspent = (et_sec-st_sec)//3600
+   
+    if(hoursspent>1):
+        Tariffobject.parking_money=hoursspent*Tariffobject.per_hour_money
+    else:
+        Tariffobject.parking_money=Tariffobject.per_hour_money
+    
+    Tariffobject.parking_time = hoursspent
+    Positionobject.save()
     UserInfoobject.save()
     Tariffobject.save()
     context= {

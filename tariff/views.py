@@ -26,32 +26,32 @@ def bills(request,username):
     if not request.user.is_authenticated:
         return redirect('/users/home')
     
-    print(username)
+    # print(username)
     query=Tariffs.objects.get(user_name=username)
-    print(query.site_address)
-    print(query.user_name)
-    print('print start time')
-    print(query.start_time)
-    print(datetime.now())
+    # print(query.site_address)
+    # print(query.user_name)
+    # print('print start time')
+    # print(query.start_time)
+    # print(datetime.now())
     # UserInfo
     userinfoobject= UserInfo.objects.get( user_name = username)
     if not userinfoobject.admin_bit:
       query.end_time= datetime.now()
-    print(query.end_time)
-    print("Try to print seconds")
-    print(query.start_time.second)
+    # print(query.end_time)
+    # print("Try to print seconds")
+    # print(query.start_time.second)
 
     st_sec = query.start_time.second + query.start_time.minute*60 + query.start_time.hour*24*60
 
     et_sec = query.end_time.second+ query.end_time.minute*60 + query.end_time.hour*24*60
-    print("No of minutes is:")
-    print((et_sec-st_sec)//60)
+    # print("No of minutes is:")
+    # print((et_sec-st_sec)//60)
     hoursspent = (et_sec-st_sec)//3600
-    print(query.start_time.minute)
-    print(query.end_time.second)
-    print(query.end_time.minute)
+    # print(query.start_time.minute)
+    # print(query.end_time.second)
+    # print(query.end_time.minute)
 
-    print(hoursspent)
+    # print(hoursspent)
     # delta = datetime.combine(date.today(), query.endtime) - datetime.combine(date.today(), query.start_time)
     # delta_hours = delta.days * 24 + delta.seconds / 3600.0
     if(hoursspent>1):
@@ -62,10 +62,10 @@ def bills(request,username):
     query.parking_time = hoursspent
     query.save()
 
-    print(hoursspent)
+    # print(hoursspent)
 
 
-    print(query.parking_money)
+    # print(query.parking_money)
     # print(query.start_time)
 
     context={
