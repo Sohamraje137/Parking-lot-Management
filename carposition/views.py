@@ -56,6 +56,7 @@ def download_positions(request):
 def order_position(request,site_no,posi_num):
     if not request.user.is_authenticated:
         return redirect('/users/home')
+
     position_object=Positions.objects.get(site_no=site_no, position_num = posi_num)
     position_object.position_status = False
     position_object.save()

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en-us">
     <head>
         {% load staticfiles %}
         <meta charset="UTF-8">
@@ -35,92 +35,92 @@
         </style>
         <script>
                 //window.setTimeout(showfh,3000); 
-                var timer;
-                function showfh(){
-                    fhi = 1;
-                    timer = setInterval(xzfh2, 10); 
-                };
-                var current = 0;
-                function xzfh(){
-                    current = (current)%360;
-                    document.body.style.transform = 'rotate('+current+'deg)';
-                    current ++;
-                    if(current>360){current = 0;}
-                };
-                var fhi = 1;
-                var current2 = 1;
-                function xzfh2(){
-                    if(fhi>50){
-                        document.body.style.transform = 'rotate(0deg)';
-                        clearInterval(timer);
-                        return;
-                    }
-                    current = (current2)%360;
-                    document.body.style.transform = 'rotate('+current+'deg)';
-                    current ++;
-                    if(current2 == 1){current2 = -1;}else{current2 = 1;}
-                    fhi++;
-                };
+                // var timer;
+                // function showfh(){
+                //     fhi = 1;
+                //     timer = setInterval(xzfh2, 10); 
+                // };
+                // var current = 0;
+                // function xzfh(){
+                //     current = (current)%360;
+                //     document.body.style.transform = 'rotate('+current+'deg)';
+                //     current ++;
+                //     if(current>360){current = 0;}
+                // };
+                // var fhi = 1;
+                // var current2 = 1;
+                // function xzfh2(){
+                //     if(fhi>50){
+                //         document.body.style.transform = 'rotate(0deg)';
+                //         clearInterval(timer);
+                //         return;
+                //     }
+                //     current = (current2)%360;
+                //     document.body.style.transform = 'rotate('+current+'deg)';
+                //     current ++;
+                //     if(current2 == 1){current2 = -1;}else{current2 = 1;}
+                //     fhi++;
+                // };
         </script>
     </head>
     <body>
         {% block content %}{% endblock %}
 
         <script type="text/javascript">
-            //服务器校验
-            function severCheck(){
-                if(check()){
-                    var loginname = $("#loginname").val();
-                    var password = $("#password").val();
-                    var code = loginname+","+password+","+$("#code").val();
-                    $.ajax({
-                        type: "POST",
-                        url: 'login_login',
-                        data: {KEYDATA:code,tm:new Date().getTime()},
-                        dataType:'json',
-                        cache: false,
-                        success: function(data){
-                            if("success" == data.result){
-                                saveCookie();
-                                window.location.href="<%=basePath%>main/index";
-                            }else if("usererror" == data.result){
-                                $("#loginname").tips({
-                                    side : 1,
-                                    msg : " Incorrect name or password",
-                                    bg : '#FF5080',
-                                    time : 15
-                                });
-                                showfh();
-                                $("#loginname").focus();
-                            }else if("codeerror" == data.result){
-                                $("#code").tips({
-                                    side : 1,
-                                    msg : "Verification code input is incorrect",
-                                    bg : '#FF5080',
-                                    time : 15
-                                });
-                                showfh();
-                                $("#code").focus();
-                            }else{
-                                $("#loginname").tips({
-                                    side : 1,
-                                    msg : "Missing parameters",
-                                    bg : '#FF5080',
-                                    time : 15
-                                });
-                                showfh();
-                                $("#loginname").focus();
-                            }
-                        }
-                    });
-                }
-            }
+            //Server verification
+            // function severCheck(){
+            //     if(check()){
+            //         var loginname = $("#loginname").val();
+            //         var password = $("#password").val();
+            //         var code = loginname+","+password+","+$("#code").val();
+            //         $.ajax({
+            //             type: "POST",
+            //             url: 'login_login',
+            //             data: {KEYDATA:code,tm:new Date().getTime()},
+            //             dataType:'json',
+            //             cache: false,
+            //             success: function(data){
+            //                 if("success" == data.result){
+            //                     saveCookie();
+            //                     window.location.href="<%=basePath%>main/index";
+            //                 }else if("usererror" == data.result){
+            //                     $("#loginname").tips({
+            //                         side : 1,
+            //                         msg : " Incorrect name or password",
+            //                         bg : '#FF5080',
+            //                         time : 15
+            //                     });
+            //                     showfh();
+            //                     $("#loginname").focus();
+            //                 }else if("codeerror" == data.result){
+            //                     $("#code").tips({
+            //                         side : 1,
+            //                         msg : "Verification code input is incorrect",
+            //                         bg : '#FF5080',
+            //                         time : 15
+            //                     });
+            //                     showfh();
+            //                     $("#code").focus();
+            //                 }else{
+            //                     $("#loginname").tips({
+            //                         side : 1,
+            //                         msg : "Missing parameters",
+            //                         bg : '#FF5080',
+            //                         time : 15
+            //                     });
+            //                     showfh();
+            //                     $("#loginname").focus();
+            //                 }
+            //             }
+            //         });
+            //     }
+            // }
         
-            $(document).ready(function() {
-                changeCode1();
-                $("#codeImg").bind("click", changeCode1);
-                $("#zcodeImg").bind("click", changeCode2);
-            });
+            // $(document).ready(function() {
+            //     changeCode1();
+            //     $("#codeImg").bind("click", changeCode1);
+            //     $("#zcodeImg").bind("click", changeCode2);
+            // });
     
             $(document).keyup(function(event) {
                 if (event.keyCode == 13) {
@@ -317,7 +317,7 @@
                 var nowtime = date2str(new Date(),"yyyyMMdd");
                 $.ajax({
                     type: "POST",
-                    url: 'appSysUser/registerSysUser.do',
+                    // url: 'appSysUser/registerSysUser.do',
                     data: {USERNAME:$("#USERNAME").val(),PASSWORD:$("#PASSWORD").val(),NAME:$("#name").val(),EMAIL:$("#EMAIL").val(),rcode:$("#rcode").val(),FKEY:$.md5('USERNAME'+nowtime+',fh,'),tm:new Date().getTime()},
                     dataType:'json',
                     cache: false,
@@ -359,9 +359,9 @@
         
         function ismail(mail){
             return(new RegExp(/^(?:[a-zA-Z0-9]+[_\-\+\.]?)*[a-zA-Z0-9]+@(?:([a-zA-Z0-9]+[_\-]?)*[a-zA-Z0-9]+\.)+([a-zA-Z]{2,})+$/).test(mail));
-        }
-        //js  
-        </script>
+        } 
+         //js  
+        </script> 
         <script src="{% static '/login/js/bootstrap.min.js' %}"></script>
         <script src="{% static '/js/jquery-1.7.2.js' %}"></script>
         <script src="{% static '/login/js/jquery.easing.1.3.js' %}"></script>

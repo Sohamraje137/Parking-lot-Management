@@ -24,8 +24,6 @@ Parking system|Home
             <h2 class="normal_text">Welcome {{ user.username }}, How can I help you?</h2>
             
         
-            <h4 class="normal_text">To use this system, please log in to this system first.
-            </h4>
             {% endif %}
 
             {% if not user.is_authenticated %}
@@ -49,8 +47,8 @@ Parking system|Home
         
 
 
-            {% if  user.is_authenticated and not user.is_superuser  %}
-            <a class="normal_text" href="/tariff/bills/{{ user.username}}">Check Bill</a>
+            {% if  user.is_authenticated and not user.is_superuser and User_info.car_booking_status or User_info.admin_bit  %}
+            <a class="normal_text" href="/tariff/bills">Check Bill</a>
 
             {% endif %}
 
@@ -69,7 +67,7 @@ Parking system|Home
                 </div>
                 <div style="display: inline;text-align: center; background: rgba(0,0,0, 0.4); padding: 10px 5px; border: 1px solid #f1f1f1;">
                   {% if user.is_authenticated %}
-                     <a class="normal_text" href="logout">Log-out</a>
+                     <a class="normal_text" href="{% url 'logout' %}">Log-out</a>
                   {% endif %}               
                 </div>
 

@@ -22,18 +22,30 @@ def download_list(request):
     # qs = Tariffs.objects.get()
     # return render_to_csv_response(qs,filename=u'tariffs.csv')
 
-def bills(request,username):
+def bills(request):
     if not request.user.is_authenticated:
         return redirect('/users/home')
-    
-    # print(username)
+    print('printing the url')
+    print(request.get_full_path)
+     
+    username= request.user
+    testobject=Tariffs.objects.all()
+    testobject2=Tariffs.objects.filter(user_name=username)
+
+    for i in testobject:
+        print("Printing testobjects :")
+        print(i)
+    for c in testobject2:
+        print("Printing testobject2 :")
+        print(c)
+    print(username)
     query=Tariffs.objects.get(user_name=username)
     #    query=Tariffs.objects.all(user_name=username)
-    # print(query.site_address)
-    # print(query.user_name)
-    # print('print start time')
-    # print(query.start_time)
-    # print(datetime.now())
+    print(query.site_address)
+    print(query.user_name)
+    print('print start time')
+    print(query.start_time)
+    print(datetime.now())
     userinfoobject= UserInfo.objects.get( user_name = username)
     if not userinfoobject.admin_bit:
       query.end_time= datetime.now()
@@ -50,7 +62,7 @@ def bills(request,username):
     # print(query.start_time.minute)
     # print(query.end_time.second)
     # print(query.end_time.minute)
-    # print(hoursspent)
+    print(hoursspent)
     # delta = datetime.combine(date.today(), query.endtime) - datetime.combine(date.today(), query.start_time)
     # delta_hours = delta.days * 24 + delta.seconds / 3600.0
     if(hoursspent>1):
@@ -61,11 +73,12 @@ def bills(request,username):
     query.parking_time = hoursspent
     query.save()
 
-    # print(hoursspent)
+    print(hoursspent)
 
 
-    # print(query.parking_money)
-    # print(query.start_time)
+    print(query.parking_money)
+    print(query.start_time)
+    print("Rendering context ")
 
     context={
         'query':query

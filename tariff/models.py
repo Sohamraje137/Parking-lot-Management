@@ -17,9 +17,9 @@ class Tariffs(models.Model):
     parking_time = models.FloatField(verbose_name='Parking time',default=0.0,editable=False,unique=False)
     parking_money = models.FloatField(verbose_name=u'Bill Amount',default=0.0,editable=False)
     TICKET_TYPE_CHOICES=(('Hour',u'Hour ticket'),    )
-    ticket_type = models.CharField(u'Billing type',max_length=20,choices=TICKET_TYPE_CHOICES,unique=False)
+    ticket_type = models.CharField(u'Billing type',max_length=20,default='hour',choices=TICKET_TYPE_CHOICES,unique=False)
     per_hour_money = models.FloatField(verbose_name=u'Parking fees',default=0.0,editable=True)
-    site_address= models.CharField(u'',max_length=20,default='Not Parked')
+    site_address= models.CharField(u'Site Address',max_length=20,default='Not Parked')
     postion_no= models.CharField(u'Parking Site Number',max_length=20,default='Not Parked')
     def __str__(self):
         return u'%s' % self.user_name

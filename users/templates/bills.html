@@ -6,9 +6,8 @@ Parking system|Home
 {% load staticfiles %}
 {% block content %}
 
-  <h1>Hello</h1>
+  <h1>Hello     {{query.user_name}} </h1>
 
-    {{query.user_name}}
 
     <table class="table">
             <thead>                        
@@ -23,7 +22,7 @@ Parking system|Home
                         <h4 >  {{ query.car_number }}</h4>
                         <h4 >  {{ query.start_time }}</h4>
                         <h4 >  {{ query.end_time }}</h4>
-                        <h4 >  {{ query.ticket_type }}</h4>
+                        <!-- <h4 >  {{ query.ticket_type }}</h4> -->
                         <h4 >  {{ query.parking_time }}</h4>
 
                         <h4 >  {{ query.parking_money }}</h4>

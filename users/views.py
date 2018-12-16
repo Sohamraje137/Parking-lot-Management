@@ -29,15 +29,16 @@ def home(request):
         print(request.user)
         User_info = UserInfo.objects.get(user_name=request.user)
         print(User_info.car_booking_status)
+        print(car_pos_num)
         context = {
         'User_info': User_info,
         'car_pos_num' : car_pos_num,
-    }
+        }
     else:
         context = {
             'car_pos_num' : car_pos_num
     }
-
+    print("Rendering home")   
     return render(request,'home.html',context)
 
 def login(request):
@@ -85,12 +86,13 @@ def user_detail(request):
             # print("Hello")
             user_info = UserInfo()
             # print("Hi")
-            user_info.user_first_name= user_form.cleaned_data['user_first_name']
+            user_info.user_name = user_form.cleaned_data['user_name']
+            # user_info.user_first_name= user_form.cleaned_data['user_first_name']
             user_info.user_phone = user_form.cleaned_data['user_phone']
             user_info.car_number = user_form.cleaned_data['car_number']
             user_info.car_type = user_form.cleaned_data['car_type']
-            user_info.car_color = user_form.cleaned_data['car_color']
-            user_info.car_kind = user_form.cleaned_data['car_kind']
+            # user_info.car_color = user_form.cleaned_data['car_color']
+            # user_info.car_kind = user_form.cleaned_data['car_kind']
             user_info.save()
         return redirect(request.GET.get('from', reverse('home')))
     else:
@@ -117,6 +119,7 @@ def Checkoutuser(request):
 
 
 def emptyslot(request,username):
+    print(username)
     UserInfoobject = UserInfo.objects.get(user_name= username)
     UserInfoobject.admin_bit= True
     UserInfoobject.car_booking_status=False

@@ -15,6 +15,7 @@ Parking system|Register
           {% endif %}
         
         <form action="" method="post" name="loginForm" id="loginForm">
+            <!-- {% csrf_token %} -->
             {% csrf_token %}
             <div class="control-group normal_text">					
                 <h3 style="text-align:center";style="font-family:verdana;color:white;font-size:40px;">
@@ -49,7 +50,7 @@ Parking system|Register
                                 </span><input type="text" name="idcar" required id="idcar" id="loginname" placeholder="Please enter your Car ID card" class="keypad" keypadMode="full" allowKeyboard="true" value=""/>
                             </div>
                         </div>
-                    </div>
+                </div>
             <div class="control-group">
                 <div class="controls">
                     <div class="main_input_box">
