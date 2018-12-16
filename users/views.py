@@ -10,10 +10,14 @@ from django.conf import settings
 from tariff.models import Tariffs
 from django.views.decorators.cache import cache_control
 from django.contrib.auth.decorators import login_required
+# import datetime
+# import time
+# from datetime import datetime, date, time, timedelta
+
+from django.utils import timezone
 import datetime
 import time
 from datetime import datetime, date, time, timedelta
-
 
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
@@ -86,7 +90,8 @@ def user_detail(request):
             # print("Hello")
             user_info = UserInfo()
             # print("Hi")
-            user_info.user_name = user_form.cleaned_data['user_name']
+            user_info.user_name = request.user.username
+            # user_info.user_name = user_form.cleaned_data['user_name']
             # user_info.user_first_name= user_form.cleaned_data['user_first_name']
             user_info.user_phone = user_form.cleaned_data['user_phone']
             user_info.car_number = user_form.cleaned_data['car_number']
@@ -126,21 +131,34 @@ def emptyslot(request,username):
     Tariffobject= Tariffs.objects.get(user_name=username)
     Tariffobject.end_time = datetime.now()
 
-    # print(datetime.now())
-    # print(Tariffobject.start_time)
-    # print(Tariffobject.end_time)
+    print(datetime.now())
+    print(Tariffobject.start_time)
+    print(Tariffobject.end_time)
     Positionobject= Positions.objects.get(position_num =Tariffobject.postion_no)
     Positionobject.position_status=True
+    '''    if(hoursspent>1):
+        query.parking_money=hoursspent*query.per_hour_money
+    else:
+        query.parking_money=query.per_hour_money
     
+    query.parking_time = hoursspent
+    query.save()'''
+    print(Tariffobject.start_time.hour)
+    print(Tariffobject.end_time.hour)
     st_sec = Tariffobject.start_time.second + Tariffobject.start_time.minute*60 + Tariffobject.start_time.hour*24*60
     et_sec = Tariffobject.end_time.second+ Tariffobject.end_time.minute*60 + Tariffobject.end_time.hour*24*60
-    hoursspent = (et_sec-st_sec)//3600
-   
+    hoursspent = (et_sec-st_sec)
+    print(hoursspent)
+    hoursspent = hoursspent//3600
+    print(st_sec)
+    print(et_sec)
+    print(hoursspent)
     if(hoursspent>1):
-        Tariffobject.parking_money=hoursspent*Tariffobject.per_hour_money
+        # hoursspent=hoursspent*Tariffobject.per_hour_money
+        Tariffobject.parking_money= hoursspent*Tariffobject.per_hour_money
     else:
         Tariffobject.parking_money=Tariffobject.per_hour_money
-    
+    print(hoursspent)
     Tariffobject.parking_time = hoursspent
     Positionobject.save()
     UserInfoobject.save()

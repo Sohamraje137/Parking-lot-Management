@@ -41,7 +41,7 @@ $(function () {
             try {
                 a(this).spliterRender()
             } catch (b) {
-                alert("分隔条出错，注意脚本的引入：spliter.js")
+                alert("The separator is wrong, pay attention to the introduction of the script: splitter.js")
             }
         }
         if (a(this).is("input")) {
@@ -54,7 +54,7 @@ $(function () {
                         a(this).attr("trueType", "autoComplete");
                         a(this).autoCompleteRender()
                     } catch (b) {
-                        alert("自动完成框出错，注意脚本的引入：autoComplete.js")
+                        alert("Auto-complete box error, pay attention to the introduction of script: autoComplete.js")
                     }
                 }
                 if (a(this).hasClass("autoCompleteIcon")) {
@@ -69,7 +69,7 @@ $(function () {
                             a(this).attr("trueType", "color");
                             a(this).colorRender()
                         } catch (b) {
-                            alert("颜色选择器出错，注意脚本的引入：color.js")
+                            alert("Color selector error, pay attention to the introduction of the script: color.js")
                         }
                     } else {
                         if (a(this).hasClass("date")) {
@@ -90,7 +90,7 @@ $(function () {
                                         a(this).attr("trueType", "keypad");
                                         a(this).keypadRender()
                                     } catch (b) {
-                                        alert("软键盘控件出错，注意脚本的引入：keypad.js")
+                                        alert("Soft keyboard control error, pay attention to the introduction of the script: keypad.js")
                                     }
                                 } else {
                                     if (a(this).hasClass("stepper")) {
@@ -101,7 +101,7 @@ $(function () {
                                             a(this).attr("trueType", "stepper");
                                             a(this).stepperRender()
                                         } catch (b) {
-                                            alert("数字步进器出错，注意脚本的引入：stepper.js")
+                                            alert("Digital stepper error, pay attention to the introduction of script：stepper.js")
                                         }
                                     } else {
                                         if (a(this).attr("keepDefaultStyle") == "true" || a(this).attr("keepDefaultStyle") == true) {} else {
@@ -285,7 +285,7 @@ $(function () {
                 return
             }
             if (d) {
-                a.cursorMessage("注意：大写键开启了")
+                a.cursorMessage("Note: The capitalization key is turned on")
             } else {}
         })
     };

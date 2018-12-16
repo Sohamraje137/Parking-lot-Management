@@ -122,23 +122,23 @@
             //     $("#zcodeImg").bind("click", changeCode2);
             // });
     
-            $(document).keyup(function(event) {
-                if (event.keyCode == 13) {
-                    $("#to-recover").trigger("click");
-                }
-            });
+            // $(document).keyup(function(event) {
+            //     if (event.keyCode == 13) {
+            //         $("#to-recover").trigger("click");
+            //     }
+            // });
     
-            function genTimestamp() {
-                var time = new Date();
-                return time.getTime();
-            }
+            // function genTimestamp() {
+            //     var time = new Date();
+            //     return time.getTime();
+            // }
     
-            function changeCode1() {
-                $("#codeImg").attr("src", "code.do?t=" + genTimestamp());
-            }
-            function changeCode2() {
-                $("#zcodeImg").attr("src", "code.do?t=" + genTimestamp());
-            }
+            // function changeCode1() {
+            //     $("#codeImg").attr("src", "code.do?t=" + genTimestamp());
+            // }
+            // function changeCode2() {
+            //     $("#zcodeImg").attr("src", "code.do?t=" + genTimestamp());
+            // }
     
             
             function check() {
@@ -367,15 +367,15 @@
         <script src="{% static '/login/js/jquery.easing.1.3.js' %}"></script>
         <script src="{% static '/login/js/jquery.mobile.customized.min.js' %}"></script>
         <script src="{% static '/login/js/camera.min.js' %}"></script>
-        <script src="{% static '/login/js/templatemo_script.js' %}"></script>
+        <!-- <script src="{% static '/login/js/templatemo_script.js' %}"></script> -->
         <script src="{% static '/login/js/ban.js' %}"></script>
         <script type="text/javascript" src="{% static '/js/jQuery.md5.js' %}"></script>
         <script type="text/javascript" src="{% static '/js/jquery.tips.js' %}"></script>
         <script type="text/javascript" src="{% static '/js/jquery.cookie.js' %}"></script>
+         <!-- -->
         
-        <!--  -->
         <script type="text/javascript" src="{% static '/login/keypad/js/form/keypad.js' %}"></script>
-        <script type="text/javascript" src="{% static '/login/keypad/js/framework.js' %}"></script>
-        <!-- -->
+        <script type="text/javascript" src="{% static '/login/keypad/js/framework.js' %}"></script> 
+        <!--
     </body>
 </html>

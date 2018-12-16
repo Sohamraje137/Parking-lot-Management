@@ -6,10 +6,117 @@ Parking system|Home
 {% load staticfiles %}
 {% block content %}
 
-  <h1>Hello</h1>
 
-    <h1> you are checking out {{tariffobject.user_name}}</h1>
+    <div id="sitebg" style="width:100%;height: 110%; text-align: center;margin: 0 auto;position: absolute;"></div>
+    <div>
+        <div id="windows1">
+            <div style="height: 50px;"></div>
+            <div id="loginbox" style=" border: 1px solid #f1f1f1;background-color: rgba(0,0,0, 0.4); padding: 20px;">
+                   
+                <h1  style="color:white ; margin-bottom: 50px;"> You are checking out {{tariffobject.user_name}} </h1>
+                   <!-- {% for rate in rates %}
+                   <h4>  {{ rate.pay_per_time }}</h4>
+                    {% endfor %} -->
+                <table class="table">
+                        <thead>                        
+                                <i class="fas fa-warehouse" style="font-size: 50px; color: white ;float : left ; padding-bottom: 20px;padding-left: 170px;"></i>
+                                <i class="fas fa-dollar-sign" style="font-size: 50px; color: white ;float : right ; padding-bottom: 20px;padding-right: 210px;"></i>
+                        </thead>
+                        <tbody>
+    
+                           
+                            <tr>
 
+                                
+                                <td>                    
+                                    <h4 style="color:white ; float: right ; padding-right: 150px;">  Username</h4>
+                                </td>
+                                <td>
+                                    <h4 style="padding-left: 150px; color:white">{{ tariffobject.user_name }}   </h4>
+                                </td>
+                            </tr>
+
+                            <tr>
+
+                                
+                                <td>                    
+                                    <h4 style="color:white ; float: right ; padding-right: 150px;">  Car Plate Number</h4>
+                                </td>
+                                <td>
+                                    <h4 style="padding-left: 150px; color:white"> {{ tariffobject.car_number }}</h4> 
+                                </td>
+                            </tr>
+
+                            <tr>
+
+                                
+                                <td>                    
+                                    <h4 style="color:white ; float: right ; padding-right: 150px;">  In-Time</h4>
+                                </td>
+                                <td>
+                                    <h4 style="padding-left: 150px; color:white"> {{ tariffobject.start_time }}</h4> 
+                                </td>
+                            </tr>
+
+                            <tr>
+
+                                
+                                <td>                    
+                                    <h4 style="color:white ; float: right ; padding-right: 150px;">  Out-Time</h4>
+                                </td>
+                                <td>
+                                    <h4 style="padding-left: 150px; color:white"> {{ tariffobject.end_time }}</h4> 
+                                </td>
+                            </tr>
+
+                            <tr>
+
+                                
+                                <td>                    
+                                    <h4 style="color:white ; float: right ; padding-right: 150px;"> Parking Site Address</h4>
+                                </td>
+                                <td>
+                                    <h4 style="padding-left: 150px; color:white"> {{ tariffobject.site_address }}</h4> 
+                                </td>
+                            </tr>
+                            
+                            <tr>
+
+                                
+                                <td>                    
+                                    <h4 style="color:white ; float: right ; padding-right: 150px;">  Parking Time(hrs)</h4>
+                                </td>
+                                <td>
+                                    <h4 style="padding-left: 150px; color:white"> {{ tariffobject.parking_time }}</h4> 
+                                </td>
+                            </tr>
+                            <tr>
+
+                                
+                                <td>                    
+                                    <h4 style="color:white ; float: right ; padding-right: 150px;"> Per Hour Charge</h4>
+                                </td>
+                                <td>
+                                    <h4 style="padding-left: 150px; color:white"> {{ tariffobject.per_hour_money }}</h4> 
+                                </td>
+                            </tr>
+                            
+                            <tr>
+
+                                
+                                <td>                    
+                                    <h4 style="color:white ; float: right ; padding-right: 150px;">  Total Charge</h4>
+                                </td>
+                                <td>
+                                    <h4 style="padding-left: 150px; color:white"> {{ tariffobject.parking_money }}</h4> 
+                                </td>
+                            </tr>
+                        </tbody>
+                </table>                    
+            </div>        
+        </div>            
+    </div>
+<!-- 
     <table class="table">
             <thead>                        
             </thead>
@@ -23,11 +130,11 @@ Parking system|Home
                         <h4 >  {{ tariffobject.car_number }}</h4>
                         <h4 >  {{ tariffobject.start_time }}</h4>
                         <h4 >  {{ tariffobject.end_time }}</h4>
-                        <h4 >  {{ tariffobject.ticket_type }}</h4>
-                        <h4 >  {{ tariffobject.parking_time }}</h4>
+                        <!-- <h4 >  {{ tariffobject.ticket_type }}</h4> -->
+                        <!-- <h4 >  {{ tariffobject.parking_time }}</h4>
 
                         <h4 >  {{ tariffobject.parking_money }}</h4>
-                        <h4 >  {{ tariffobject.per_hour_money }}</h4>
+                        <h4 >  {{ tariffobject.site_address }}</h4>
 
 
                     </td>
@@ -35,7 +142,7 @@ Parking system|Home
                 
                     
             </tbody>
-    </table>          
+    </table>           -->
 
 
 {% endblock %}

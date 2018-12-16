@@ -44,7 +44,7 @@ class RegForm(forms.Form):
         return password_again
 
 class UserDetailForm(forms.Form):
-    user_name= forms.CharField(label=u'Username ',widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':' Enter your username again'}))
+    # user_name= forms.CharField(label=u'Username ',widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':' Enter your username again'}))
     # user_first_name= forms.CharField(label=u'Name ',widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':' Enter your Name'}))
     user_phone = forms.CharField(label=u'cellphone number',widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':' Phone Number'}))
     car_number = forms.CharField(label=u'number plate',widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Please enter the license plate number'}))
@@ -55,7 +55,7 @@ class UserDetailForm(forms.Form):
 
 
     def clean(self):
-        user_name= self.cleaned_data['user_name']
+        # user_name= self.cleaned_data['user_name']
         user_phone = self.cleaned_data['user_phone']
         car_number = self.cleaned_data['car_number']
         car_type = self.cleaned_data['car_type']

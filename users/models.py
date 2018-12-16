@@ -17,7 +17,7 @@ class UserInfo(models.Model):
     admin_bit=  models.BooleanField('Admin Bit',default=False)
 
     def __str__(self):
-        return u'%s' % self.user_first_name
+        return u'%s' % self.car_number
     class Meta:        
         verbose_name = 'User Info'
         verbose_name_plural = 'User Info'
