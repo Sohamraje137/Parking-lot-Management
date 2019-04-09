@@ -20,6 +20,9 @@ def index(request):
     return HttpResponse(u'Here is the ticketing center')
 
 def download_list(request):
+    if not (request.user.is_superuser):
+        return redirect('/users/home')
+
     qs = Rates.objects.all()
     return render_to_csv_response(qs,filename=u'Rates.csv')
     # qs = Tariffs.objects.get()
@@ -95,6 +98,9 @@ def bills(request):
     return render(request,'bills.html',context)
 
 def download_csv(request):
+    if not (request.user.is_superuser):
+        return redirect('/users/home')
+
     qs = Tariffs.objects.all()
     return render_to_csv_response(qs,filename=u'tariffs.csv')
 

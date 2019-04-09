@@ -117,6 +117,9 @@ def logout(request):
     return HttpResponseRedirect(settings.LOGIN_URL)
 
 def Checkoutuser(request):
+    if not request.user.is_site_manager:
+        return redirect('/users/home')
+
     UserInfolist = UserInfo.objects.values()
 
     # print(UserInfolist)
@@ -128,6 +131,9 @@ def Checkoutuser(request):
 
 
 def emptyslot(request,username):
+    if request.user.is_site_manager:
+        return redirect('/users/home')
+
     print(username)
     UserInfoobject = UserInfo.objects.get(user_name= username)
     UserInfoobject.admin_bit= True

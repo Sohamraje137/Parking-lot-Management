@@ -20,11 +20,11 @@ User = get_user_model()
 # Create your views here.
 
 def accounts_index(request):#,site_num):
+    if not request.user.is_accountant:
+        return redirect('/users/home')
     # site_no = get_object_or_404(Site, site_num=site_num)
     if not request.user.is_authenticated:
         return redirect('/users/home')
-    rates= Rates.objects.filter()
-    positions_list = Site.objects.filter()#(position_status=True)
     # for rate in rates:
     #     print(rate.pay_per_time)
     tariffobject= Tariffs.objects.filter() #    rates= Rates.objects.filter()
@@ -33,11 +33,8 @@ def accounts_index(request):#,site_num):
     for i in tariffobject:
         totalamount+= i.parking_money
     print(totalamount)
-    zipped_data=zip(positions_list, rates)
     context = {
-        'rates': rates,
-        'positions_list':positions_list,
-        'zipped_data':zipped_data,
-        'totalamount':totalamount
+        'totalamount':totalamount,
+        'tariffobject' : tariffobject,
     }
     return render(request,'accounts_index.html',context)

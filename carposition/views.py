@@ -52,6 +52,9 @@ def site_position_book(request,site_no):
 
 
 def download_positions(request):
+    if not request.user.is_superuser :
+        return redirect('/users/home')
+
     qs = Site.objects.all()    
     return render_to_csv_response(qs,filename=u'slots.csv')
 
@@ -96,3 +99,34 @@ def order_position(request,site_no,posi_num):
     tariff.save()       
 
     return render(request , 'bocked.html')
+
+
+def admins(request):
+    if not (request.user.is_superuser or request.user.is_site_manager):
+        return redirect('/users/home')
+    rates= Rates.objects.filter()
+    positions_list = Site.objects.filter()#(position_status=True)
+    # for rate in rates:
+    #     print(rate.pay_per_time)
+    zipped_data=zip(positions_list, rates)
+    context = {
+        'rates': rates,
+        'positions_list':positions_list,
+        'zipped_data':zipped_data
+    }
+    return render(request,'car_site_index_admin.html',context)
+
+def admin_position(request,site_no):
+    if not (request.user.is_superuser or request.user.is_site_manager):
+        return redirect('/users/home')
+
+    positions_list = Site.objects.filter(site_no=site_no)# and status_list.site_no=site_no and status_list.position_status=True )
+    # site_name= Site.objects.filter(site_no=site_no).site_address
+    context = {
+        'site_no':site_no,
+        # 'site_name':site_name
+    }
+
+    # print(positions_list)
+    context['positions_list']=positions_list
+    return render(request,'car_posi_index_admin.html',context)

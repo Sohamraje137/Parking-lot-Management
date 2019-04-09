@@ -10,9 +10,8 @@ Parking system|
     <div id="windows1">
         <div style="height: 50px;"></div>
         <div id="loginbox" style=" border: 1px solid #f1f1f1;background-color: rgba(0,0,0, 0.4); padding: 20px;">
-            <h1  style="color:white ; margin-bottom: 50px;"> Today's total collection : Rs. {{totalamount}} </h1>
- 
-            <h1  style="color:white ; margin-bottom: 50px;"> Revenue per Site </h1>
+               
+            <h1  style="color:white ; margin-bottom: 50px;"> Site Lists </h1>
                <!-- {% for rate in rates %}
                <h4>  {{ rate.pay_per_time }}</h4>
                 {% endfor %} -->
@@ -23,19 +22,18 @@ Parking system|
                     </thead>
                     <tbody>
 
-                        {% for object in tariffobject %}
+                        {% for item,rate in zipped_data %}
                         <tr>
                             <td>
-                                <h4 style="padding-left: 150px; "> <a style="color:white" > {{ object.site_address}}</a>   </h4>
+                                <h4 style="padding-left: 150px; "> <a style="color:white" href="/carposition/check/{{ item.pk }}"> {{ item.site_address}}</a>   </h4>
                             </td>
                             
                             <td>                    
-                                <h4 style="color:white ; float: right ; padding-right: 150px;">  Rs. {{ object.parking_money }}</h4>
+                                <h4 style="color:white ; float: right ; padding-right: 150px;">  Rs. {{ rate.pay_per_time }}/hour</h4>
                             </td>
                         </tr>
                         
                         {% endfor %}
-
                     </tbody>
             </table>                    
         </div>        
