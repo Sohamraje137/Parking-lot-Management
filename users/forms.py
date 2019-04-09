@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib import auth
-from django.contrib.auth.models import User
 from users.models import UserInfo
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='username', widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'please enter user name'}))

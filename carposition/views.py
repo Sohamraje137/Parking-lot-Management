@@ -8,13 +8,15 @@ from tariff.models import Tariffs,Tickets,Rates
 import time
 import random
 from djqscsv import render_to_csv_response
-from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.conf import settings
 import time
 from datetime import datetime, date, time, timedelta
 
 # Create your views here.
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
 
 def car_site_index(request):#,site_num):
     # site_no = get_object_or_404(Site, site_num=site_num)

@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','928ee1a7.ngrok.io']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,8 +39,13 @@ INSTALLED_APPS = [
     'tariff',
     'users',
     'carposition',
-    'Employee'
+    'Employee',
+    'accountant',
+    'sitemanager',
 ]
+
+AUTH_USER_MODEL = "users.User" 
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

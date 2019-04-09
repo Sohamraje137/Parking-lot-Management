@@ -22,4 +22,5 @@ urlpatterns = [
     path('users/',include('users.urls')),
     path('tariff/',include('tariff.urls')),
     path('carposition/',include('carposition.urls')),
+    path('accounts/',include('accountant.urls')),
 ]

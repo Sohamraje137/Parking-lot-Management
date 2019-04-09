@@ -12,6 +12,9 @@ from django.utils import timezone
 import datetime
 import time
 from datetime import datetime, date, time, timedelta
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
 
 def index(request):
     return HttpResponse(u'Here is the ticketing center')

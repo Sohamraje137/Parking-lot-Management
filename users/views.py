@@ -18,6 +18,8 @@ from django.utils import timezone
 import datetime
 import time
 from datetime import datetime, date, time, timedelta
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
@@ -28,8 +30,9 @@ def home(request):
 
     car_positions =Positions.objects.filter(position_status=True)
     car_pos_num = car_positions.count()
-
-    if request.user.is_authenticated and  not request.user.is_superuser :
+    # print(request.user.is_accountant)
+    # print(request.user.is_site_manager)
+    if request.user.is_authenticated and  not request.user.is_superuser and not request.user.is_accountant and not request.user.is_site_manager :
         print(request.user)
         User_info = UserInfo.objects.get(user_name=request.user)
         print(User_info.car_booking_status)
@@ -74,6 +77,7 @@ def register(request):
 
             user = auth.authenticate(username=username, password=password)
             auth.login(request, user)
+            
             return redirect(request.GET.get('from', reverse('user_detail')))
     else:
         reg_form = RegForm()
