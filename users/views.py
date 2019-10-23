@@ -64,7 +64,9 @@ def login(request):
 def register(request):
     if request.method == 'POST':
         reg_form = RegForm(request.POST)
+        print("Hello ")
         if reg_form.is_valid():
+            print("Hello")
             username = reg_form.cleaned_data['username']
             email = reg_form.cleaned_data['email']
             password = reg_form.cleaned_data['password']
@@ -79,6 +81,7 @@ def register(request):
             auth.login(request, user)
             
             return redirect(request.GET.get('from', reverse('user_detail')))
+        print("This place reached " + str(reg_form.errors))
     else:
         reg_form = RegForm()
     context = {}

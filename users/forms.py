@@ -26,15 +26,22 @@ class RegForm(forms.Form):
     password_again = forms.CharField(label='Re-enter password', min_length=6,widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder':'Password'}))
 
     def clean_username(self):
+        print("inside clean_username")
         username = self.cleaned_data['username']
+        print(username)
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError('Username already exists')
+        print("clean_username completed")
         return username
 
     def clean_email(self):
+        print("inside email")
         email = self.cleaned_data['email']
+        print(email)
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError('email already exits')
+
+        print("clean_email completed")
         return email
 
     def clean_password_again(self):
@@ -42,6 +49,9 @@ class RegForm(forms.Form):
         password_again = self.cleaned_data['password_again']
         if password != password_again:
             raise forms.ValidationError('Inconsistent password entered twice')
+
+        print("clean_password_again completed")
+
         return password_again
 
 class UserDetailForm(forms.Form):

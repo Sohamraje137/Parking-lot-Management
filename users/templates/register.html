@@ -14,7 +14,7 @@ Parking system|Register
             <p>Your username or email or car number is already taken. Please try again.</p>
           {% endif %}
         
-        <form action="" method="post" name="loginForm" id="loginForm">
+        <form action="" method="post" name="RegForm" id="RegForm">
             <!-- {% csrf_token %} -->
             {% csrf_token %}
             <div class="control-group normal_text">					
@@ -38,7 +38,7 @@ Parking system|Register
                         <div class="main_input_box">
                             <span class="add-on bg_lg">
                             <i><img height="37" src="{% static '/login/user.png' %}" /></i>
-                            </span><input type="email" name="email"  required required id="id_username" id="id_email" value="" placeholder="please input your email" />
+                            </span><input type="email" name="email"  required required id="id_email" id="id_email" value="" placeholder="please input your email" />
                         </div>
                     </div>
                 </div>
