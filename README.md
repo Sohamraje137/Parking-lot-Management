@@ -8,6 +8,8 @@ A website to allow users to book and Admin to manage parking lot of a city/area.
 4. python3
 # usages
 ```
+python manage.py makemigrations
+
 python manage.py migrate
 
 python manage.py runserver
